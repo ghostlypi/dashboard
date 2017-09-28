@@ -141,50 +141,47 @@ window.onload = () =>
 	});
 
 	id('save').onclick = () => {
-    localStorage.saveData_dashboard = true;
+    var dashboardData = {
+      'color': cls('clr-fg')[0].style.color || '#fff',
+      'note1': id('note1').childNodes[0].value || '',
+      'note2': id('note2').childNodes[0].value || '',
+      'goals': [],
+      'tasks': []
+    };
     
-		localStorage.color_dashboard = JSON.stringify(cls('clr-fg')[0].style.color || '#fff');
-		
-		localStorage.note1_dashboard = JSON.stringify(id('note1').childNodes[0].value || '');
-		localStorage.note2_dashboard = JSON.stringify(id('note2').childNodes[0].value || '');
-		
-		var goals_dashboard = [];
 		for (var i = 0; i < 10; i++) {
-			goals_dashboard.push({
+			dashboardData.goals.push({
 				'name': cls('goal')[i].value || '',
 				'data': cls('percent')[i].value || ''
 			});
 		}
-		localStorage.goals_dashboard = JSON.stringify(goals_dashboard);
-    
-    var tasks_dashboard = [];
 		for (var i = 0; i < 10; i++) {
-			tasks_dashboard.push({
+			dashboardData.tasks.push({
 				'name': cls('task-name')[i].value || '',
 			  'time': cls('task-time')[i].value || ''
 			});
 		}
-		localStorage.tasks_dashboard = JSON.stringify(tasks_dashboard);
+    
+		localStorage.dashboardData = JSON.stringify(dashboardData);
 	};
 
 	id('load').onclick = () => {
-    if (localStorage.saveData_dashboard === undefined)
+    if (localStorage.dashboardData === undefined)
       return;
     
-    var goals = JSON.parse(localStorage.goals_dashboard);
-    var tasks = JSON.parse(localStorage.tasks_dashboard);
+    var data = JSON.parse(localStorage.dashboardData);
     
-    setColor(JSON.parse(localStorage.color_dashboard));
-    id('note1').childNodes[0].value = JSON.parse(localStorage.note1_dashboard) || '';
-    id('note2').childNodes[0].value = JSON.parse(localStorage.note2_dashboard) || '';
+    setColor(data.color);
+    id('note1').childNodes[0].value = data.note1 || '';
+    id('note2').childNodes[0].value = data.note2 || '';
     
     for(var i = 0; i < 10; i++) {
-      cls('goal')[i].value = goals[i].name || '';
-      cls('percent')[i].value = goals[i].data || '';
+      cls('goal')[i].value = data.goals[i].name || '';
+      cls('percent')[i].value = data.goals[i].data || '';
     }
     for(var i = 0; i < 10; i++) {
-      cls('task-name')[i].value = tasks[i].name || '';
-      cls('task-time')[i].value = tasks[i].time || '';
+      cls('task-name')[i].value = data.tasks[i].name || '';
+      cls('task-time')[i].value = data.tasks[i].time || '';
     }
   };
   id('load').click();
