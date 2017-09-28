@@ -150,22 +150,14 @@ window.onload = () =>
 		localStorage.note1_dashboard = id('note1').childNodes[0].value || '';
 		localStorage.note2_dashboard = id('note2').childNodes[0].value || '';
 		
-		localStorage.goal0Name_dashboard = cls('goal')[0].value || '';
-		localStorage.goal0Data_dashboard = cls('percent')[0].value || '';
-		localStorage.goal1Name_dashboard = cls('goal')[1].value || '';
-		localStorage.goal1Data_dashboard = cls('percent')[1].value || '';
-		localStorage.goal2Name_dashboard = cls('goal')[2].value || '';
-		localStorage.goal2Data_dashboard = cls('percent')[2].value || '';
-		localStorage.goal3Name_dashboard = cls('goal')[3].value || '';
-		localStorage.goal3Data_dashboard = cls('percent')[3].value || '';
-		localStorage.goal4Name_dashboard = cls('goal')[4].value || '';
-		localStorage.goal4Data_dashboard = cls('percent')[4].value || '';
-		localStorage.goal5Name_dashboard = cls('goal')[5].value || '';
-		localStorage.goal5Data_dashboard = cls('percent')[5].value || '';
-		localStorage.goal6Name_dashboard = cls('goal')[6].value || '';
-		localStorage.goal6Data_dashboard = cls('percent')[6].value || '';
-		localStorage.goal7Name_dashboard = cls('goal')[7].value || '';
-		localStorage.goal7Data_dashboard = cls('percent')[7].value || '';
+		var goals_dashboard = [];
+		for (var i = 0; i < 10; i++) {
+			localStorage.goals_dashboard.push({
+				'name': cls('goal')[i].value || '',
+				'data': cls('percent')[i].value || ''
+			});
+		}
+		localStorage.goals_dashboard = JSON.stringify(goals_dashboard);
 		////////////////// NOTE
 		// Finish conversion; localStorage can store all object types. Use JSON.stringify(data).
 		////////////////// NOTE
