@@ -141,113 +141,94 @@ window.onload = () =>
 	});
 
 	id('save').onclick = () =>
-	{
-		const data =
+{
+		/***
+			The idea is to convert the file-storage system to a localStorage system.
+		***/
+		localStorage.color_dashboard = cls('clr-fg')[0].style.color || '#fff';
+		
+		localStorage.note1_dashboard = id('note1').childNodes[0].value || '';
+		localStorage.note2_dashboard = id('note2').childNodes[0].value || '';
+		
+		localStorage.goal0Name_dashboard = cls('goal')[0].value || '';
+		localStorage.goal0Data_dashboard = cls('percent')[0].value || '';
+		localStorage.goal1Name_dashboard = cls('goal')[1].value || '';
+		localStorage.goal1Data_dashboard = cls('percent')[1].value || '';
+		localStorage.goal2Name_dashboard = cls('goal')[2].value || '';
+		localStorage.goal2Data_dashboard = cls('percent')[2].value || '';
+		localStorage.goal3Name_dashboard = cls('goal')[3].value || '';
+		localStorage.goal3Data_dashboard = cls('percent')[3].value || '';
+		localStorage.goal4Name_dashboard = cls('goal')[4].value || '';
+		localStorage.goal4Data_dashboard = cls('percent')[4].value || '';
+		localStorage.goal5Name_dashboard = cls('goal')[5].value || '';
+		localStorage.goal5Data_dashboard = cls('percent')[5].value || '';
+		localStorage.goal6Name_dashboard = cls('goal')[6].value || '';
+		localStorage.goal6Data_dashboard = cls('percent')[6].value || '';
+		localStorage.goal7Name_dashboard = cls('goal')[7].value || '';
+		localStorage.goal7Data_dashboard = cls('percent')[7].value || '';
+		////////////////// NOTE
+		// Finish conversion; localStorage can store all object types. Use JSON.stringify(data).
+		////////////////// NOTE
+		'goal8':
 		{
-			'color':cls('clr-fg')[0].style.color || '#fff',
-			'note1':id('note1').childNodes[0].value || '',
-			'note2':id('note2').childNodes[0].value || '',
-			'goal0':
-			{
-				'name':cls('goal')[0].value || '',
-				'data':cls('percent')[0].value || ''
-			},
-			'goal1':
-			{
-				'name':cls('goal')[1].value || '',
-				'data':cls('percent')[1].value || ''
-			},
-			'goal2':
-			{
-				'name':cls('goal')[2].value || '',
-				'data':cls('percent')[2].value || ''
-			},
-			'goal3':
-			{
-				'name':cls('goal')[3].value || '',
-				'data':cls('percent')[3].value || ''
-			},
-			'goal4':
-			{
-				'name':cls('goal')[4].value || '',
-				'data':cls('percent')[4].value || ''
-			},
-			'goal5':
-			{
-				'name':cls('goal')[5].value || '',
-				'data':cls('percent')[5].value || ''
-			},
-			'goal6':
-			{
-				'name':cls('goal')[6].value || '',
-				'data':cls('percent')[6].value || ''
-			},
-			'goal7':
-			{
-				'name':cls('goal')[7].value || '',
-				'data':cls('percent')[7].value || ''
-			},
-			'goal8':
-			{
-				'name':cls('goal')[8].value || '',
-				'data':cls('percent')[8].value || ''
-			},
-			'goal9':
-			{
-				'name':cls('goal')[9].value || '',
-				'data':cls('percent')[9].value || ''
-			},
-			'task0':
-			{
-				'name':cls('task-name')[0].value || '',
-				'time':cls('task-time')[0].value || ''
-			},
-			'task1':
-			{
-				'name':cls('task-name')[1].value || '',
-				'time':cls('task-time')[1].value || ''
-			},
-			'task2':
-			{
-				'name':cls('task-name')[2].value || '',
-				'time':cls('task-time')[2].value || ''
-			},
-			'task3':
-			{
-				'name':cls('task-name')[3].value || '',
-				'time':cls('task-time')[3].value || ''
-			},
-			'task4':
-			{
-				'name':cls('task-name')[4].value || '',
-				'time':cls('task-time')[4].value || ''
-			},
-			'task5':
-			{
-				'name':cls('task-name')[5].value || '',
-				'time':cls('task-time')[5].value || ''
-			},
-			'task6':
-			{
-				'name':cls('task-name')[6].value || '',
-				'time':cls('task-time')[6].value || ''
-			},
-			'task7':
-			{
-				'name':cls('task-name')[7].value || '',
-				'time':cls('task-time')[7].value || ''
-			},
-			'task8':
-			{
-				'name':cls('task-name')[8].value || '',
-				'time':cls('task-time')[8].value || ''
-			},
-			'task9':
-			{
-				'name':cls('task-name')[9].value || '',
-				'time':cls('task-time')[9].value || ''
-			},
-		};
+			'name':cls('goal')[8].value || '',
+			'data':cls('percent')[8].value || ''
+		},
+		'goal9':
+		{
+			'name':cls('goal')[9].value || '',
+			'data':cls('percent')[9].value || ''
+		},
+		'task0':
+		{
+			'name':cls('task-name')[0].value || '',
+			'time':cls('task-time')[0].value || ''
+		},
+		'task1':
+		{
+			'name':cls('task-name')[1].value || '',
+			'time':cls('task-time')[1].value || ''
+		},
+		'task2':
+		{
+			'name':cls('task-name')[2].value || '',
+			'time':cls('task-time')[2].value || ''
+		},
+		'task3':
+		{
+			'name':cls('task-name')[3].value || '',
+			'time':cls('task-time')[3].value || ''
+		},
+		'task4':
+		{
+			'name':cls('task-name')[4].value || '',
+			'time':cls('task-time')[4].value || ''
+		},
+		'task5':
+		{
+			'name':cls('task-name')[5].value || '',
+			'time':cls('task-time')[5].value || ''
+		},
+		'task6':
+		{
+			'name':cls('task-name')[6].value || '',
+			'time':cls('task-time')[6].value || ''
+		},
+		'task7':
+		{
+			'name':cls('task-name')[7].value || '',
+			'time':cls('task-time')[7].value || ''
+		},
+		'task8':
+		{
+			'name':cls('task-name')[8].value || '',
+			'time':cls('task-time')[8].value || ''
+		},
+		'task9':
+		{
+			'name':cls('task-name')[9].value || '',
+			'time':cls('task-time')[9].value || ''
+		},
 		const text = JSON.stringify(data);
 		const dl = document.createElement('a');
 		dl.setAttribute('href','data:text/plain;charset=utf-8,' + encodeURIComponent(text));
