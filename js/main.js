@@ -140,119 +140,54 @@ window.onload = () =>
 		},1000/100);
 	});
 
-	id('save').onclick = () =>
-{
-		/***
-			The idea is to convert the file-storage system to a localStorage system.
-		***/
-		localStorage.color_dashboard = cls('clr-fg')[0].style.color || '#fff';
+	id('save').onclick = () => {
+    localStorage.saveData_dashboard = true;
+    
+		localStorage.color_dashboard = JSON.stringify(cls('clr-fg')[0].style.color || '#fff');
 		
-		localStorage.note1_dashboard = id('note1').childNodes[0].value || '';
-		localStorage.note2_dashboard = id('note2').childNodes[0].value || '';
+		localStorage.note1_dashboard = JSON.stringify(id('note1').childNodes[0].value || '');
+		localStorage.note2_dashboard = JSON.stringify(id('note2').childNodes[0].value || '');
 		
 		var goals_dashboard = [];
 		for (var i = 0; i < 10; i++) {
-			localStorage.goals_dashboard.push({
+			goals_dashboard.push({
 				'name': cls('goal')[i].value || '',
 				'data': cls('percent')[i].value || ''
 			});
 		}
 		localStorage.goals_dashboard = JSON.stringify(goals_dashboard);
-		////////////////// NOTE
-		// Finish conversion; localStorage can store all object types. Use JSON.stringify(data).
-		////////////////// NOTE
-		'goal8':
-		{
-			'name':cls('goal')[8].value || '',
-			'data':cls('percent')[8].value || ''
-		},
-		'goal9':
-		{
-			'name':cls('goal')[9].value || '',
-			'data':cls('percent')[9].value || ''
-		},
-		'task0':
-		{
-			'name':cls('task-name')[0].value || '',
-			'time':cls('task-time')[0].value || ''
-		},
-		'task1':
-		{
-			'name':cls('task-name')[1].value || '',
-			'time':cls('task-time')[1].value || ''
-		},
-		'task2':
-		{
-			'name':cls('task-name')[2].value || '',
-			'time':cls('task-time')[2].value || ''
-		},
-		'task3':
-		{
-			'name':cls('task-name')[3].value || '',
-			'time':cls('task-time')[3].value || ''
-		},
-		'task4':
-		{
-			'name':cls('task-name')[4].value || '',
-			'time':cls('task-time')[4].value || ''
-		},
-		'task5':
-		{
-			'name':cls('task-name')[5].value || '',
-			'time':cls('task-time')[5].value || ''
-		},
-		'task6':
-		{
-			'name':cls('task-name')[6].value || '',
-			'time':cls('task-time')[6].value || ''
-		},
-		'task7':
-		{
-			'name':cls('task-name')[7].value || '',
-			'time':cls('task-time')[7].value || ''
-		},
-		'task8':
-		{
-			'name':cls('task-name')[8].value || '',
-			'time':cls('task-time')[8].value || ''
-		},
-		'task9':
-		{
-			'name':cls('task-name')[9].value || '',
-			'time':cls('task-time')[9].value || ''
-		},
-		const text = JSON.stringify(data);
-		const dl = document.createElement('a');
-		dl.setAttribute('href','data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-		dl.setAttribute('download','abhi.dashB');
-		dl.style.display = 'none';
-		document.body.appendChild(dl);
-		dl.click();
-		document.body.removeChild(dl);
+    
+    var tasks_dashboard = [];
+		for (var i = 0; i < 10; i++) {
+			tasks_dashboard.push({
+				'name': cls('task-name')[i].value || '',
+			  'time': cls('task-time')[i].value || ''
+			});
+		}
+		localStorage.tasks_dashboard = JSON.stringify(tasks_dashboard);
 	};
 
-	id('fileid').onchange = () =>
-	{
-		const fl = id('fileid').files[0];
-		const reader = new FileReader();
-		reader.onload = (e) =>
-		{
-			const data = JSON.parse(e.target.result);
-			setColor(data.color);
-			id('note1').childNodes[0].value = data.note1 || '';
-			id('note2').childNodes[0].value = data.note2 || '';
-			for(let i=0;i<10;i++)
-			{
-				cls('goal')[i].value = data['goal' + i].name || '';
-				cls('percent')[i].value = data['goal' + i].data || '';
-				cls('task-name')[i].value = data['task' + i].name || '';
-				cls('task-time')[i].value = data['task' + i].time || '';
-			}
-		};
-		reader.readAsText(fl);
-	};
-
-	id('load').onclick = () => {id('fileid').click();};
+	id('load').onclick = () => {
+    if (localStorage.saveData_dashboard === undefined)
+      return;
+    
+    var goals = JSON.parse(localStorage.goals_dashboard);
+    var tasks = JSON.parse(localStorage.tasks_dashboard);
+    
+    setColor(JSON.parse(localStorage.color_dashboard));
+    id('note1').childNodes[0].value = JSON.parse(localStorage.note1_dashboard) || '';
+    id('note2').childNodes[0].value = JSON.parse(localStorage.note2_dashboard) || '';
+    
+    for(var i = 0; i < 10; i++) {
+      cls('goal')[i].value = goals[i].name || '';
+      cls('percent')[i].value = goals[i].data || '';
+    }
+    for(var i = 0; i < 10; i++) {
+      cls('task-name')[i].value = tasks[i].name || '';
+      cls('task-time')[i].value = tasks[i].time || '';
+    }
+  };
+  id('load').click();
 
 	const tasks = [0,0,0,0,0,0,0,0,0,0];
 
