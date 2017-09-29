@@ -145,6 +145,7 @@ window.onload = () =>
 	      'color': cls('clr-fg')[0].style.color || '#fff',
 	      'note1': id('note1').childNodes[0].value || '',
 	      'note2': id('note2').childNodes[0].value || '',
+	      'note3': id('note3').childNodes[0].value || '',
 	      'name': id('name').children[0].value || '',
 	      'height': id('height').children[0].value || '',
 	      'age': id('age').children[0].value || '',
@@ -177,6 +178,7 @@ window.onload = () =>
 	    setColor(data.color);
 	    id('note1').childNodes[0].value = data.note1 || '';
 	    id('note2').childNodes[0].value = data.note2 || '';
+	    id('note3').childNodes[0].value = data.note3 || '';
 	    id('name').children[0].value = data.name || '';
 	    id('height').children[0].value = data.height || '';
 	    id('age').children[0].value = data.age || '';
