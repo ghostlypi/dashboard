@@ -140,18 +140,18 @@ window.onload = () =>
 		},1000/100);
 	});
 
-	id('save').onclick = () => {
-    var dashboardData = {
-      'color': cls('clr-fg')[0].style.color || '#fff',
-      'note1': id('note1').childNodes[0].value || '',
-      'note2': id('note2').childNodes[0].value || '',
-      'name': id('name').children[0].value || '',
-      'height': id('height').children[0].value || '',
-      'age': id('age').children[0].value || '',
-      'goals': [],
-      'tasks': []
-    };
-    
+	const save = _ => {
+	    var dashboardData = {
+	      'color': cls('clr-fg')[0].style.color || '#fff',
+	      'note1': id('note1').childNodes[0].value || '',
+	      'note2': id('note2').childNodes[0].value || '',
+	      'name': id('name').children[0].value || '',
+	      'height': id('height').children[0].value || '',
+	      'age': id('age').children[0].value || '',
+	      'goals': [],
+	      'tasks': []
+	    };
+
 		for (var i = 0; i < 10; i++) {
 			dashboardData.goals.push({
 				'name': cls('goal')[i].value || '',
@@ -164,34 +164,34 @@ window.onload = () =>
 			  'time': cls('task-time')[i].value || ''
 			});
 		}
-    
+
 		localStorage.dashboardData = JSON.stringify(dashboardData);
 	};
 
-	id('load').onclick = () => {
-    if (localStorage.dashboardData === undefined)
-      return;
-    
-    var data = JSON.parse(localStorage.dashboardData);
-    
-    setColor(data.color);
-    id('note1').childNodes[0].value = data.note1 || '';
-    id('note2').childNodes[0].value = data.note2 || '';
-    id('name').children[0].value = data.name || '';
-    id('height').children[0].value = data.height || '';
-    id('age').children[0].value = data.age || '';
-    
-    for(var i = 0; i < 10; i++) {
-      cls('goal')[i].value = data.goals[i].name || '';
-      cls('percent')[i].value = data.goals[i].data || '';
-    }
-    for(var i = 0; i < 10; i++) {
-      cls('task-name')[i].value = data.tasks[i].name || '';
-      cls('task-time')[i].value = data.tasks[i].time || '';
-    }
+	const load = _ => {
+	    if (localStorage.dashboardData === undefined)
+	      return;
+
+	    var data = JSON.parse(localStorage.dashboardData);
+
+	    setColor(data.color);
+	    id('note1').childNodes[0].value = data.note1 || '';
+	    id('note2').childNodes[0].value = data.note2 || '';
+	    id('name').children[0].value = data.name || '';
+	    id('height').children[0].value = data.height || '';
+	    id('age').children[0].value = data.age || '';
+
+	    for(var i = 0; i < 10; i++) {
+	      cls('goal')[i].value = data.goals[i].name || '';
+	      cls('percent')[i].value = data.goals[i].data || '';
+	    }
+	    for(var i = 0; i < 10; i++) {
+	      cls('task-name')[i].value = data.tasks[i].name || '';
+	      cls('task-time')[i].value = data.tasks[i].time || '';
+	    }
   };
-  id('load').click();
-  setInterval(_ => id('save').click(), 1000);
+  load();
+  setInterval(_ => save(), 1000);
 
 	const tasks = [0,0,0,0,0,0,0,0,0,0];
 
