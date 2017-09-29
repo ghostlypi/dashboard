@@ -145,6 +145,9 @@ window.onload = () =>
       'color': cls('clr-fg')[0].style.color || '#fff',
       'note1': id('note1').childNodes[0].value || '',
       'note2': id('note2').childNodes[0].value || '',
+      'name': id('name').children[0].value || '',
+      'height': id('height').children[0].value || '',
+      'age': id('age').children[0].value || '',
       'goals': [],
       'tasks': []
     };
@@ -174,6 +177,9 @@ window.onload = () =>
     setColor(data.color);
     id('note1').childNodes[0].value = data.note1 || '';
     id('note2').childNodes[0].value = data.note2 || '';
+    id('name').children[0].value = data.name || '';
+    id('height').children[0].value = data.height || '';
+    id('age').children[0].value = data.age || '';
     
     for(var i = 0; i < 10; i++) {
       cls('goal')[i].value = data.goals[i].name || '';
@@ -185,6 +191,7 @@ window.onload = () =>
     }
   };
   id('load').click();
+  setInterval(_ => id('save').click(), 1000);
 
 	const tasks = [0,0,0,0,0,0,0,0,0,0];
 
@@ -196,6 +203,9 @@ window.onload = () =>
 		tasks[idx] = setInterval(() =>
 		{
 			i++;
+      if (cls('task-time')[idx].value === "") {
+        cls('task-time')[idx].value = "00:10:00";
+      }
 			const dt = cls('task-time')[idx].value.split(':').map(v => parseInt(v));
 			let h = (i % 3600 === 0) ? dt[0] - 1 : dt[0];
 			let m = (i % 60   === 0) ? dt[1] - 1 : dt[1];
@@ -213,6 +223,8 @@ window.onload = () =>
 			if(h === -1)
 			{
 				clearInterval(tasks[idx]);
+        cls('task-time')[idx].value = '';
+        return;
 			}
 			h = parseLen(h);
 			m = parseLen(m);
