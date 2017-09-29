@@ -212,17 +212,17 @@ window.onload = () =>
 			let h = (i % 3600 === 0) ? dt[0] - 1 : dt[0];
 			let m = (i % 60   === 0) ? dt[1] - 1 : dt[1];
 			let s = dt[2] - 1;
-			if(s === -1)
+			if(s <= -1)
 			{
 				m--;
 				s = 59;
 			}
-			if(m === -1)
+			if(m <= -1)
 			{
 				h--;
 				m = 59;
 			}
-			if(h === -1)
+			if(h <= -1)
 			{
 				clearInterval(tasks[idx]);
         cls('task-time')[idx].value = '';
