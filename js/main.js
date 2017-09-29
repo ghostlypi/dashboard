@@ -56,7 +56,7 @@ window.onload = () =>
 		e => e.onclick = () =>
 	{
 		const elem = cls('percent')[[].indexOf.call(cls('add'),e)];
-		elem.value = Math.min(parseInt(elem.value) + 1,360);
+		elem.value = Math.min(parseInt(elem.value) + 1,100);
 	});
 
 	[].forEach.call(cls('sub'),
