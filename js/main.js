@@ -209,21 +209,18 @@ window.onload = () =>
         cls('task-time')[idx].value = "00:10:00";
       }
 			const dt = cls('task-time')[idx].value.split(':').map(v => parseInt(v));
-			let h = (i % 3600 === 0) ? dt[0] - 1 : dt[0];
-			let m = (i % 60   === 0) ? dt[1] - 1 : dt[1];
+			let h = (i % 3600 == 0) ? dt[0] - 1 : dt[0];
+			let m = (i % 60   == 0) ? dt[1] - 1 : dt[1];
 			let s = dt[2] - 1;
-			if(s < 0)
-			{
+			if(s < 0) {
 				m--;
 				s = 59;
 			}
-			if(m <= -1)
-			{
+			if(m < 0) {
 				h--;
 				m = 59;
 			}
-			if(h <= -1)
-			{
+			if(h < 0) {
 				clearInterval(tasks[idx]);
         cls('task-time')[idx].value = '';
         return;
