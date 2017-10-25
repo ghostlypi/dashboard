@@ -1,3 +1,4 @@
+<!doctype html>
 <head>
   <meta http-equiv='content-type' content='text/html; charset=utf-8' />
   <link rel='stylesheet' href='css/style.css' type='text/css' />
@@ -5,9 +6,14 @@
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
   <script src='js/main.js' charset='utf-8'></script>
   <script src='https://apis.google.com/js/client.js?onload=handleClientLoad'></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name='google-signin-client_id' content='508015321797-tom5s0phufp8hjfg4r84nt7qsrpiaavu.apps.googleusercontent.com' />
 </head>
 <body>
-  
+ <div id='signin'>
+  It works!
+ </div>
+ <div id='dashboard'>
   <div id='title' class='cell clr-fg'>
     <div id='city'></div>
     <div id='date'></div>
@@ -119,106 +125,125 @@
     <div id='name'>Name:<input class="input clr-fg" placeholder="name"></input></div> 
     <div id='height'>Height:<input class="input clr-fg" placeholder="height"></input></div>
     <div id='age'>Age:<input class="input clr-fg" placeholder="age"></input></div>
-</div>
-<div id='goal1' class='cell clr-fg div-goal'>
-  <ol>
-    <li class='bar'>
-      <textarea placeholder='Goal' class='clr-fg goal'></textarea>
-      <textarea class='percent clr-fg'>0</textarea>
-      <svg viewbox='0 0 100 100'>
-        <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
-      </svg>
-      <div class='add'>+</div>
-      <div class='sub'>-</div>
-    </li>
-    <li class='bar'>
-      <textarea placeholder='Goal' class='clr-fg goal'></textarea>
-      <textarea class='percent clr-fg'>0</textarea>
-      <svg viewbox='0 0 100 100'>
-        <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
-      </svg>
-      <div class='add'>+</div>
-      <div class='sub'>-</div>
-    </li>
-    <li class='bar'>
-      <textarea placeholder='Goal' class='clr-fg goal'></textarea>
-      <textarea class='percent clr-fg'>0</textarea>
-      <svg viewbox='0 0 100 100'>
-        <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
-      </svg>
-      <div class='add'>+</div>
-      <div class='sub'>-</div>
-    </li>
-    <li class='bar'>
-      <textarea placeholder='Goal' class='clr-fg goal'></textarea>
-      <textarea class='percent clr-fg'>0</textarea>
-      <svg viewbox='0 0 100 100'>
-        <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
-      </svg>
-      <div class='add'>+</div>
-      <div class='sub'>-</div>
-    </li>
-    <li class='bar'>
-      <textarea placeholder='Goal' class='clr-fg goal'></textarea>
-      <textarea class='percent clr-fg'>0</textarea>
-      <svg viewbox='0 0 100 100'>
-        <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
-      </svg>
-      <div class='add'>+</div>
-      <div class='sub'>-</div>
-    </li>
-  </ol>
-</div>
-<div id='goal2' class='cell clr-fg div-goal'>
-  <ol>
-    <li class='bar'>
-      <textarea placeholder='Goal' class='clr-fg goal'></textarea>
-      <textarea class='percent clr-fg'>0</textarea>
-      <svg viewbox='0 0 100 100'>
-        <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
-      </svg>
-      <div class='add'>+</div>
-      <div class='sub'>-</div>
-    </li>
-    <li class='bar'>
-      <textarea placeholder='Goal' class='clr-fg goal'></textarea>
-      <textarea class='percent clr-fg'>0</textarea>
-      <svg viewbox='0 0 100 100'>
-        <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
-      </svg>
-      <div class='add'>+</div>
-      <div class='sub'>-</div>
-    </li>
-    <li class='bar'>
-      <textarea placeholder='Goal' class='clr-fg goal'></textarea>
-      <textarea class='percent clr-fg'>0</textarea>
-      <svg viewbox='0 0 100 100'>
-        <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
-      </svg>
-      <div class='add'>+</div>
-      <div class='sub'>-</div>
-    </li>
-    <li class='bar'>
-      <textarea placeholder='Goal' class='clr-fg goal'></textarea>
-      <textarea class='percent clr-fg'>0</textarea>
-      <svg viewbox='0 0 100 100'>
-        <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
-      </svg>
-      <div class='add'>+</div>
-      <div class='sub'>-</div>
-    </li>
-    <li class='bar'>
-      <textarea placeholder='Goal' class='clr-fg goal'></textarea>
-      <textarea class='percent clr-fg'>0</textarea>
-      <svg viewbox='0 0 100 100'>
-        <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
-      </svg>
-      <div class='add'>+</div>
-      <div class='sub'>-</div>
-    </li>
-  </ol>
-</div>
-<div id='note1' class='cell clr-fg'><textarea autocomplete='off' autocorrect='off' autocapitalize='off' spellcheck='false' placeholder='Enter notes here.' class='clr-fg'></textarea></div>
-<div id='note2' class='cell clr-fg'><textarea autocomplete='off' autocorrect='off' autocapitalize='off' spellcheck='false' placeholder='Enter notes here.' class='clr-fg'></textarea></div>
-<div id='note3' class='cell clr-fg'><textarea autocomplete='off' autocorrect='off' autocapitalize='off' spellcheck='false' placeholder='Enter notes here.' class='clr-fg'></textarea></div>
+  </div>
+  <div id='goal1' class='cell clr-fg div-goal'>
+   <ol>
+     <li class='bar'>
+       <textarea placeholder='Goal' class='clr-fg goal'></textarea>
+       <textarea class='percent clr-fg'>0</textarea>
+       <svg viewbox='0 0 100 100'>
+         <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
+       </svg>
+       <div class='add'>+</div>
+       <div class='sub'>-</div>
+     </li>
+     <li class='bar'>
+       <textarea placeholder='Goal' class='clr-fg goal'></textarea>
+       <textarea class='percent clr-fg'>0</textarea>
+       <svg viewbox='0 0 100 100'>
+         <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
+       </svg>
+       <div class='add'>+</div>
+       <div class='sub'>-</div>
+     </li>
+     <li class='bar'>
+       <textarea placeholder='Goal' class='clr-fg goal'></textarea>
+       <textarea class='percent clr-fg'>0</textarea>
+       <svg viewbox='0 0 100 100'>
+         <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
+       </svg>
+       <div class='add'>+</div>
+       <div class='sub'>-</div>
+     </li>
+     <li class='bar'>
+       <textarea placeholder='Goal' class='clr-fg goal'></textarea>
+       <textarea class='percent clr-fg'>0</textarea>
+       <svg viewbox='0 0 100 100'>
+         <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
+       </svg>
+       <div class='add'>+</div>
+       <div class='sub'>-</div>
+     </li>
+     <li class='bar'>
+       <textarea placeholder='Goal' class='clr-fg goal'></textarea>
+       <textarea class='percent clr-fg'>0</textarea>
+       <svg viewbox='0 0 100 100'>
+         <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
+       </svg>
+       <div class='add'>+</div>
+       <div class='sub'>-</div>
+     </li>
+   </ol>
+  </div>
+  <div id='goal2' class='cell clr-fg div-goal'>
+   <ol>
+     <li class='bar'>
+       <textarea placeholder='Goal' class='clr-fg goal'></textarea>
+       <textarea class='percent clr-fg'>0</textarea>
+       <svg viewbox='0 0 100 100'>
+         <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
+       </svg>
+       <div class='add'>+</div>
+       <div class='sub'>-</div>
+     </li>
+     <li class='bar'>
+       <textarea placeholder='Goal' class='clr-fg goal'></textarea>
+       <textarea class='percent clr-fg'>0</textarea>
+       <svg viewbox='0 0 100 100'>
+         <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
+       </svg>
+       <div class='add'>+</div>
+       <div class='sub'>-</div>
+     </li>
+     <li class='bar'>
+       <textarea placeholder='Goal' class='clr-fg goal'></textarea>
+       <textarea class='percent clr-fg'>0</textarea>
+       <svg viewbox='0 0 100 100'>
+         <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
+       </svg>
+       <div class='add'>+</div>
+       <div class='sub'>-</div>
+     </li>
+     <li class='bar'>
+       <textarea placeholder='Goal' class='clr-fg goal'></textarea>
+       <textarea class='percent clr-fg'>0</textarea>
+       <svg viewbox='0 0 100 100'>
+         <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
+       </svg>
+       <div class='add'>+</div>
+       <div class='sub'>-</div>
+     </li>
+     <li class='bar'>
+       <textarea placeholder='Goal' class='clr-fg goal'></textarea>
+       <textarea class='percent clr-fg'>0</textarea>
+       <svg viewbox='0 0 100 100'>
+         <path fill='none' stroke='#fff' stroke-width='10' class='prog-bar'></path>
+       </svg>
+       <div class='add'>+</div>
+       <div class='sub'>-</div>
+     </li>
+   </ol>
+  </div>
+  <div id='note1' class='cell clr-fg'><textarea autocomplete='off' autocorrect='off' autocapitalize='off' spellcheck='false' placeholder='Enter notes here.' class='clr-fg'></textarea></div>
+  <div id='note2' class='cell clr-fg'><textarea autocomplete='off' autocorrect='off' autocapitalize='off' spellcheck='false' placeholder='Enter notes here.' class='clr-fg'></textarea></div>
+  <div id='note3' class='cell clr-fg'><textarea autocomplete='off' autocorrect='off' autocapitalize='off' spellcheck='false' placeholder='Enter notes here.' class='clr-fg'></textarea></div>
+ </div>
+ <ol id='settings'>
+  <li>
+   <p class='setting-name clr-fg'>Background #1</p>
+   <textarea id='background-1' class='setting-value clr-fg background' placeholder='#1a1a1c'></textarea>
+  </li>
+  <li>
+   <p class='setting-name clr-fg'>Background #2</p>
+   <textarea id='background-2' class='setting-value clr-fg background' placeholder='#2b2b2d'></textarea>
+  </li>
+  <li>
+   <p class='setting-name clr-fg'>Background #3</p>
+   <textarea id='background-3' class='setting-value clr-fg background' placeholder='#3c3c3e'></textarea>
+  </li>
+  <li>
+   <p class='setting-name clr-fg'>Foreground</p>
+   <textarea id='foreground' class='setting-value clr-fg' placeholder='#fff'></textarea>
+  </li>
+ </ol>
 </body>

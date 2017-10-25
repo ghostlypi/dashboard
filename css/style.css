@@ -8,19 +8,27 @@
 	border:none;
 	outline:none;
 }
+html{
+	--bg-color-a:#1a1a1c;
+	--bg-color-b:#2b2b2d;
+	--bg-color-c:#3c3c3e;
+}
 html,body
 {
 	width:100%;
 	height:100%;
-	background:#1a1a1c;
+	background:var(--bg-color-a);
 }
+#signin{width:100%;height:100%;visibility:visible;}
+#dashboard{width:100%;height:100%;filter:none;visibility:hidden;}
+#dashboard>*{visibility:hidden;}
 path.prog-bar{font-size:0;}
 div.cell
 {
 	position:absolute;
 	width:20%;
 	height:15%;
-	background:#2b2b2d;
+	background:var(--bg-color-b);
 	box-shadow:10px 10px #000;
 }
 div#title
@@ -81,7 +89,7 @@ textarea.task-name
 	font-family:'Ubuntu Mono';
 	font-size:1.5vw;
 	float:left;
-	background:#2b2b2d;
+	background:var(--bg-color-b);
 	width:60%;
 	height:100%;
 }
@@ -90,7 +98,7 @@ textarea.task-time
 	font-family:'Ubuntu Mono';
 	font-size:1.25vw;
 	float:left;
-	background:#2b2b2d;
+	background:var(--bg-color-b);
 	width:20%;
 	height:100%;
 }
@@ -101,10 +109,10 @@ li.task button
 	float:left;
 	width:10%;
 	height:100%;
-	background:#2b2b2d;
+	background:var(--bg-color-b);
 }
-button.task-start{float:left;width:10%;height:100%;background:#2b2b2d;}
-button.task-stop{float:left;width:10%;height:100%;background:#2b2b2d;}
+button.task-start{float:left;width:10%;height:100%;background:var(--bg-color-b);}
+button.task-stop{float:left;width:10%;height:100%;background:var(--bg-color-b);}
 div#colors
 {
 	left:5%;
@@ -122,7 +130,7 @@ div#top textarea
 	float:left;
 	width:70%;
 	height:100%;
-	background:#2b2b2d;
+	background:var(--bg-color-b);
 	resize:none;
 	font-family:'Ubuntu Mono';
 	font-size:2vw;
@@ -132,7 +140,7 @@ div#top button
 	float:left;
 	width:30%;
 	height:100%;
-	background:#3c3c3e;
+	background:var(--bg-color-c);
 	font-family:'Pompiere';
 	font-size:1vw;
 }
@@ -214,12 +222,12 @@ div.div-goal ol li
 {
 	width:100%;
 	height:20%;
-	background:#3c3c3e;
+	background:var(--bg-color-c);
 }
 textarea.goal
 {
 	float:left;
-	background:#2b2b2d;
+	background:var(--bg-color-b);
 	resize:none;
 	width:70%;
 	height:100%;
@@ -229,7 +237,7 @@ textarea.goal
 input.input
 {
 	float:left;
-	background:#2b2b2d;
+	background:var(--bg-color-b);
 	resize:none;
 	width:100%;
 	height:2%;
@@ -247,7 +255,7 @@ textarea.percent
 	float:left;
 	width:10%;
 	height:100%;
-	background:#3c3c3e;
+	background:var(--bg-color-c);
 	resize:none;
 	text-align:center;
 	font-family:'Ubuntu Mono';
@@ -311,7 +319,7 @@ div#note1 textarea, div#note2 textarea, div#note3 textarea
 {
 	width:100%;
 	height:100%;
-	background:#2b2b2d;
+	background:var(--bg-color-b);
 	resize:none;
 	font-family:'Pompiere';
 	font-size:1vw;
@@ -327,10 +335,32 @@ div#options button
 {
 	width:100%;
 	height:50%;
-	background:#2b2b2d;
+	background:var(--bg-color-b);
 	text-align:center;
 	font-family:'Pompiere';
 	font-size:2em;
 }
 .clr-bg{background:#fff;}
 .clr-fg{color:#fff;}
+ol#settings{
+	visibility:hidden;
+	position:absolute;
+	left:20%;
+	top:27.5%;
+	width:60%;
+	height:45%;
+	color:#fff;
+}
+ol#settings>li{
+	width:100%;
+	height:20%;
+}
+.setting-name,.setting-value{
+	float:left;
+	width:50%;
+	height:100%;
+	font-size:3em;
+	font-family:'Ubuntu Mono';
+	background:transparent;
+	color:#fff;
+}

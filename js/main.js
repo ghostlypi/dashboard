@@ -238,4 +238,40 @@ window.onload = () =>
 		const idx = [].indexOf.call(cls('task-stop'),elem);
 		clearInterval(tasks[idx]);
 	});
+	
+	let ctrl = true;
+	let settingsOpen = false;
+	window.onkeyup = function(e){if(e.keyCode === 17){ctrl = false;}};
+	window.onkeydown = function(e){
+		if(e.keyCode === 17){ctrl = true;}
+		else if(e.keyCode === 188 && ctrl){
+			id('dashboard').style.filter = settingsOpen ? 'none' : 'blur(5px)';
+			id('settings').style.visibility = settingsOpen ? 'hidden' : 'visible';
+			settingsOpen = !settingsOpen;
+		}
+	};
+	
+	[].forEach.call(cls('background'),function(c){
+		c.onkeydown = function(e){
+			if(e.keyCode === 13){
+				tag('html')[0].style.setProperty('--bg-color-a',id('background-1').value);
+				tag('html')[0].style.setProperty('--bg-color-b',id('background-2').value);
+				tag('html')[0].style.setProperty('--bg-color-c',id('background-3').value);
+				e.preventDefault();
+			}
+		}
+	});
+	
+	id('foreground').onkeydown = function(e){
+		if(e.keyCode === 13){
+				[].forEach.call(cls('clr-fg'),function(f){f.style.color = id('foreground').value;})
+				e.preventDefault();
+			}
+	};
+	
+	id('signin').onclick = function(){
+		id('signin').style.visibility = 'hidden';
+		id('dashboard').style.visibility = 'visible';
+		[].forEach.call(id('dashboard').children,function(c){c.style.visibility = 'visible';});
+	};
 };
