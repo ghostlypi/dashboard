@@ -367,3 +367,6 @@ ol#settings>li{
 	background:transparent;
 	color:#fff;
 }
+.setting-value{
+	margin-left: 5px;
+}
