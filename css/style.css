@@ -362,11 +362,8 @@ ol#settings>li{
 	float:left;
 	width:50%;
 	height:100%;
-	font-size:3em;
+	font-size:2em;
 	font-family:'Ubuntu Mono';
 	background:transparent;
 	color:#fff;
-}
-.setting-value{
-	margin-left: 5px;
 }
