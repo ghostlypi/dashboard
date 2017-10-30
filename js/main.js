@@ -78,7 +78,7 @@ window.onload = () =>
 	});
 
 	//==================================================================
-	
+
 	function revGeoCode(geocoder,lat,lng)
 	{
 		geocoder.geocode({'location':{'lat':lat,'lng':lng}},
@@ -238,7 +238,7 @@ window.onload = () =>
 		const idx = [].indexOf.call(cls('task-stop'),elem);
 		clearInterval(tasks[idx]);
 	});
-	
+
 	let ctrl = true;
 	let settingsOpen = false;
 	window.onkeyup = function(e){if(e.keyCode === 17){ctrl = false;}};
@@ -250,7 +250,7 @@ window.onload = () =>
 			settingsOpen = !settingsOpen;
 		}
 	};
-	
+
 	[].forEach.call(cls('background'),function(c){
 		c.onkeydown = function(e){
 			if(e.keyCode === 13){
@@ -261,15 +261,15 @@ window.onload = () =>
 			}
 		}
 	});
-	
+
 	id('foreground').onkeydown = function(e){
 		if(e.keyCode === 13){
-				[].forEach.call(cls('clr-fg'),function(f){f.style.color = id('foreground').value;})
-				[].forEach.call(cls('clr-bg'),function(f){f.style.backgroundColor = id('foreground').value;})
+				[].forEach.call(cls('clr-fg'),function(f){f.style.color = id('foreground').value;});
+				[].forEach.call(cls('clr-bg'),function(f){f.style.backgroundColor = id('foreground').value;});
 				e.preventDefault();
 			}
 	};
-	
+
 	id('signin').onclick = function(){
 		id('signin').style.visibility = 'hidden';
 		id('dashboard').style.visibility = 'visible';
