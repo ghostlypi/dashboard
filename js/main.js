@@ -265,6 +265,7 @@ window.onload = () =>
 	id('foreground').onkeydown = function(e){
 		if(e.keyCode === 13){
 				[].forEach.call(cls('clr-fg'),function(f){f.style.color = id('foreground').value;})
+				[].forEach.call(cls('clr-bg'),function(f){f.style.backgroundColor = id('foreground').value;})
 				e.preventDefault();
 			}
 	};
