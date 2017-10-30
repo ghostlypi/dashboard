@@ -20,7 +20,7 @@ html,body
 	background:var(--bg-color-a);
 }
 #signin{width:100%;height:100%;visibility:visible;}
-#signin>h1,#signin>h3{text-align:center;font-family:'Ubuntu Mono';}
+#signin>h1,#signin>h3,#signin>button{text-align:center;font-family:'Ubuntu Mono';}
 #signin>h1{font-size:5em;}
 #signin>h3{font-size:3em;}
 #dashboard{width:100%;height:100%;filter:none;visibility:hidden;}
@@ -367,6 +367,8 @@ ol#settings>li{
 	background:transparent;
 	color:#fff;
 }
-.setting-value{
-	margin-left: 5px;
+.button-main {
+	background-color: #e7e7e7;
+	color: black;
+	
 }
