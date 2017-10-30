@@ -78,7 +78,7 @@ window.onload = () =>
 	});
 
 	//==================================================================
-
+	
 	function revGeoCode(geocoder,lat,lng)
 	{
 		geocoder.geocode({'location':{'lat':lat,'lng':lng}},
@@ -88,6 +88,9 @@ window.onload = () =>
 			{
 				if(results[3])
 				{
+					if (results[3].formatted_address === "Mountain View, CA 945041, USA"){
+						id('city').textContent = "school";
+					}
 					id('city').textContent = results[3].formatted_address;
 				}
 			}
@@ -238,7 +241,7 @@ window.onload = () =>
 		const idx = [].indexOf.call(cls('task-stop'),elem);
 		clearInterval(tasks[idx]);
 	});
-
+	
 	let ctrl = true;
 	let settingsOpen = false;
 	window.onkeyup = function(e){if(e.keyCode === 17){ctrl = false;}};
@@ -250,7 +253,7 @@ window.onload = () =>
 			settingsOpen = !settingsOpen;
 		}
 	};
-
+	
 	[].forEach.call(cls('background'),function(c){
 		c.onkeydown = function(e){
 			if(e.keyCode === 13){
@@ -261,27 +264,17 @@ window.onload = () =>
 			}
 		}
 	});
-
+	
 	id('foreground').onkeydown = function(e){
 		if(e.keyCode === 13){
-				[].forEach.call(cls('clr-fg'),function(f){f.style.color = id('foreground').value;});
-				[].forEach.call(cls('clr-bg'),function(f){f.style.backgroundColor = id('foreground').value;});
+				[].forEach.call(cls('clr-fg'),function(f){f.style.color = id('foreground').value;})
 				e.preventDefault();
 			}
 	};
-
+	
 	id('signin').onclick = function(){
 		id('signin').style.visibility = 'hidden';
 		id('dashboard').style.visibility = 'visible';
 		[].forEach.call(id('dashboard').children,function(c){c.style.visibility = 'visible';});
-	};
-
-	id('shadows').onclick = function(){
-		id('shadows').firstChild.data = id('shadows').firstChild.data === 'On' ? 'Off' : 'On';
-		if(id('shadows').firstChild.data === 'Off'){
-			[].forEach.call(cls('cell'),function(c){c.style.boxShadow = 'none';});
-		}else{
-			[].forEach.call(cls('cell'),function(c){c.style.boxShadow = '10px 10px #000';});
-		}
 	};
 };
