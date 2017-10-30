@@ -89,7 +89,7 @@ window.onload = () =>
 				if(results[3])
 				{
 					if (results[3].formatted_address === "Mountain View, CA 945041, USA"){
-						id('city').textContent = "school";
+						id('city').textContent = "KLS";
 					}
 					id('city').textContent = results[3].formatted_address;
 				}
