@@ -277,4 +277,13 @@ window.onload = () =>
 		id('dashboard').style.visibility = 'visible';
 		[].forEach.call(id('dashboard').children,function(c){c.style.visibility = 'visible';});
 	};
+	
+	id('shadows').onclick = function(){
+		id('shadows').firstChild.data = id('shadows').firstChild.data === 'On' ? 'Off' : 'On';
+		if(id('shadows').firstChild.data === 'Off'){
+			[].forEach.call(cls('cell'),function(c){c.style.boxShadow = 'none';});
+		}else{
+			[].forEach.call(cls('cell'),function(c){c.style.boxShadow = '10px 10px #000';});
+		}
+	};
 };
