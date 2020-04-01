@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<title>Panchrometer</title>
+		<link rel='stylesheet' href='style.css' type='text/css' />
+	</head>
+	<body>
+
+		<!-- TEMPLATES -->
+
+		<template id='calendar-event'>
+			<li class='event'>
+				<div class='event-name'>Event</div>
+			</li>
+		</template>
+
+		<template id='todo'>
+			<li class='todo'>
+				<textarea class='todo-name' spellcheck='false' placeholder='Todo'></textarea>
+				<button class='todo-remove'>X</button>
+				<h1 class='todo-length-info'>Time length (hh:mm): </h1>
+				<input type='time' class='todo-length' value='01:00' />
+			</li>
+		</template>
+
+		<!-- EVENT INFORMATION WINDOW -->
+
+		<div class='hidden' id='event-information'>
+			<h1 id='event-name'></h1>
+			<p id='event-day'></p>
+			<input type='time' id='event-start' />
+			<input type='time' id='event-end' />
+			<button id='event-quit'>X</button>
+		</div>
+
+		<!-- TIME OPTIMIZATION WINDOW -->
+
+		<template id='activity'>
+			<li class='activity'></li>
+		</template>
+
+		<template id='activity-button'>
+			<li class='activity-button'></li>
+		</template>
+
+		<div class='objective' id='schedule-events'>
+			<section class='subwindow active' id='event-information-subwindow'>
+				<h1>Event Information</h1>
+				<textarea id='event-information-name' placeholder='Name' spellcheck='false'></textarea>
+				<div id='input-text'>Duration: </div>
+				<input type='time' id='event-time' value='01:00' min='00:00' max='11:59' />
+				<div id='check-container'>
+					<input type='checkbox' id='mon-check' />
+					<input type='checkbox' id='tue-check' />
+					<input type='checkbox' id='wed-check' />
+					<input type='checkbox' id='thu-check' />
+					<input type='checkbox' id='fri-check' />
+					<input type='checkbox' id='sat-check' />
+					<input type='checkbox' id='sun-check' />
+				</div>
+				<div id='letters-container'>
+					<div class='letter'>M</div>
+					<div class='letter'>T</div>
+					<div class='letter'>W</div>
+					<div class='letter'>T</div>
+					<div class='letter'>F</div>
+					<div class='letter'>S</div>
+					<div class='letter'>S</div>
+				</div>
+				<div id='repeating'>
+					<div id='repeating-text'>Repeating: </div>
+					<select id='repeating-select'>
+						<option selected='selected' value='N' id='select-N'>None</option>
+						<option value='D' id='select-D'>Daily</option>
+						<option value='W' id='select-W'>Weekly</option>
+						<option value='M' id='select-M'>Monthly</option>
+						<option value='A' id='select-A'>Annually</option>
+					</select>
+				</div>
+				<button id='event-information-exit'>Exit</button>
+				<button id='event-information-next'>Next</button>
+			</section>
+			<section class='subwindow' id='event-options'>
+				<h1>Would this work?</h1>
+				<button id='event-options-back'>Back</button>
+				<button id='event-options-yes'>Yes, update my schedule.</button>
+				<button id='event-options-next'>No, next</button>
+			</section>
+		</div>
+
+		<div class='objective' id='remove-events'>
+			<section class='subwindow active' id='removal-options'>
+				<h1>Suggested removals</h1>
+				<!-- div class='removal-event'>
+					<h1 class='removal-event-name'>Name</h1>
+					<button class='removal-event-about'>About</button>
+					<button class='removal-event-remove'>Remove</button>
+				</div -->
+				<button id='removal-done'>Done</button>
+				<button id='removal-about'>About</button>
+			</section>
+			<section class='subwindow' id='removal-info'>
+				<h1>About Event Removal</h1>
+				<p>lorem ipsum</p>
+				<button id='removal-back'>Back</button>
+			</section>
+		</div>
+
+		<!--div class='objective' id='time-optimization'>
+			<section class='subwindow' id='time-optimization-activities'>
+				<h1>Here are all of the activities that you have listed on your calendar(s).</h1>
+				<ul id='activities'></ul>
+				<button class='back'>Back</button>
+				<button class='next'>Next</button>
+			</section>
+			<section class='subwindow' id='time-optimization-breakdown'>
+				<h1>Here's how much time they are taking up.</h1>
+				<canvas id='pie-chart'></canvas>
+				<button class='back'>Back</button>
+				<button class='prev'>Prev</button>
+				<button class='next'>Next</button>
+			</section>
+			<section class='subwindow' id='time-optimization-action'>
+				<h1>Knowing this, what are some activities that you would like to remove from / adjust in your schedule?</h1>
+				<ul id='activity-buttons'></ul>
+				<button class='back'>Back</button>
+				<button class='prev'>Prev</button>
+			</section>
+		</div -->
+
+		<!-- SIGNIN SCREEN -->
+
+		<div class='screen active' id='signin'>
+			<h1 class='title'>Panchrometer</h1>
+			<button id='signingoogle'>Sign in with Google</button>
+		</div>
+
+		<!-- IMPORT CALENDARS SCREEN -->
+
+		<div class='screen' id='calendar-import'>
+			<h1 class='title'>Which Calendars Would You Like to Import?</h1>
+			<button id='go'>Go!</button>
+		</div>
+
+		<!-- PRODUCT SCREEN -->
+
+		<div class='screen' id='product'>
+			<section id='objectives'>
+				<h1>Actions</h1>
+				<ul id='objectives-list'>
+					<li class='objective' id='schedule-events-button'>Schedule Events</li>
+					<li class='objective' id='remove-events-button'>Remove Events</li>
+				</ul>
+			</section>
+			<section id='calendar'>
+				<div class='days'>
+				</div>
+				<div id='screenrows' class='rows'>
+					<div id='times'></div>
+				</div>
+			</section>
+		</div>
+
+		<!-- FIREBASE SDKs -->
+		<!-- The core Firebase JS SDK is always required and must be listed first -->
+		<script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+
+		<!-- Add SDKs for Firebase products that you want to use -->
+		<script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
+
+		<!-- JAVASCRIPT FILES -->
+		<script src='init.js' type='text/javascript'></script>
+		<script src='main.js' type='text/javascript'></script>
+
+		<!-- GOOGLE CALENDAR API -->
+		<script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad();"
+      onreadystatechange="if (this.readyState === 'complete') {this.onload()}">
+    </script>
+	</body>
+</html>
