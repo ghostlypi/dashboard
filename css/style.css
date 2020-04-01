@@ -1,39 +1,77 @@
 @import url('https://fonts.googleapis.com/css?family=Pompiere');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
-*
-{
+
+* {
 	margin:0;
 	padding:0;
 	overflow:hidden;
 	border:none;
 	outline:none;
 }
-html{
+
+html {
 	--bg-color-a:#1a1a1c;
 	--bg-color-b:#2b2b2d;
 	--bg-color-c:#3c3c3e;
 }
-html,body
-{
+
+html,body {
 	width:100%;
 	height:100%;
 	background:var(--bg-color-a);
 }
-#signin{width:100%;height:100%;visibility:visible;}
-#signin>h1,#signin>h3{text-align:center;font-family:'Ubuntu Mono';}
-#signin>h1{font-size:5em;}
-#signin>h3{font-size:3em;}
-#dashboard{width:100%;height:100%;filter:none;visibility:hidden;}
-#dashboard>*{visibility:hidden;}
+
+#signin {
+	width:100%;
+	height:100%;
+	visibility:visible;
+}
+
+#signin > h1, #signin > h3 {
+	text-align:center;font-family:'Ubuntu Mono';
+}
+
+#signin > h1 {
+	width:100%;
+	height:50%;
+	font-size:5em;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+#signin > h3 {
+	font-size:3em;
+	width:100%;
+	height:25%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+#dashboard {
+	width:100%;
+	height:100%;
+	filter:none;
+	visibility:hidden;
+}
+
+#dashboard > * {
+	visibility:hidden;
+}
+
 path.prog-bar{font-size:0;}
+
 div.cell
 {
 	position:absolute;
 	width:20%;
 	height:15%;
 	background:var(--bg-color-b);
-	box-shadow:10px 10px #000;
+	border-radius:5px;
+	box-shadow:5px 5px rgba(0,0,0,0.3);
 }
+
 div#title
 {
 	left:5%;
@@ -51,6 +89,45 @@ div#title
 							 -o-user-select:none;
 								   user-select:none;
 }
+
+/*
+div#calendar {
+	left:35%;
+	top:55%;
+	width:25%;
+	height:40%;
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+}
+*/
+
+div#panchrometer {
+	left:35%;
+	top:55%;
+	width:55%;
+	height:40%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	background:#ececec;
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+}
+
+div#panchrometer iframe {
+	background:#ececec;
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+}
+
 div#city
 {
 	width:100%;
@@ -93,17 +170,23 @@ textarea.task-name
 	font-size:1.5vw;
 	float:left;
 	background:var(--bg-color-b);
-	width:60%;
+	width:calc(60% - 20px);
 	height:100%;
+	resize:none;
+	padding:0px 10px;
+	line-height:4vh;
 }
 textarea.task-time
 {
 	font-family:'Ubuntu Mono';
-	font-size:1.25vw;
+	font-size:1.00vw;
 	float:left;
 	background:var(--bg-color-b);
 	width:20%;
 	height:100%;
+	resize:none;
+	text-align:center;
+	line-height:4vh;
 }
 li.task button
 {
@@ -184,7 +267,8 @@ li#q{background:#34495e;}
 li#r{background:#2c3e50;}
 li#s{background:#95a5a6;}
 li#t{background:#7f8c8d;}
-div#stats
+
+div#profile
 {
 	left:35%;
 	top:5%;
@@ -192,28 +276,71 @@ div#stats
 	height:16%;
 	font-family:'Ubuntu Mono';
 	font-size:1.1vw;
-	display:table;
-
-	-webkit-touch-callout:none;
-	  -webkit-user-select:none;
-			   -moz-user-select:none;
-						 -ms-user-select:none;
-							 -o-user-select:none;
-								   user-select:none;
 }
+
+div#profile aside {
+	float:left;
+	width:50%;
+	height:100%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+div#profile article {
+	float:left;
+	width:50%;
+	height:100%;
+}
+
+div#profile aside img {
+	width:100px;
+	height:100px;
+	border-radius:6px;
+}
+
+div#profile article h1 {
+	float:left;
+	margin:5px;
+	padding:0;
+	width:calc(100% - 10px);
+	height:calc(50% - 10px);
+	text-align:center;
+}
+
+div#profile article button {
+	float:left;
+	margin:5px;
+	padding:0;
+	border:0;
+	outline:0;
+	width:calc(50% - 10px);
+	height:calc(50% - 10px);
+	background:var(--bg-color-c);
+	color:var(--fg-color);
+	border-radius:5px;
+	transition:opacity .5s;
+}
+
+div#profile article button:hover {
+	opacity:.4;
+}
+
 div#goal1
 {
 	left:35%;
 	top:30%;
-	width:25%;
-	height:65%;
+	width:calc(25% - 20px);
+	height:calc(15% - 20px);
+	padding:10px;
 }
 div#goal2
 {
 	left:65%;
 	top:5%;
-	width:25%;
-	height:15%;
+	width:calc(25% - 20px);
+	height:calc(15% - 20px);
+	padding:10px;
 }
 div#goal2 ol li textarea.goal {font-size:1.25vw;}
 div.div-goal ol
@@ -297,35 +424,22 @@ div.add,div.sub
 							 -o-user-select:none;
 								   user-select:none;
 }
-div#note1
+div#notes
 {
 	left:65%;
 	top:30%;
 	width:25%;
 	height:15%;
 }
-div#note2
+div#notes textarea
 {
-	left:65%;
-	top:55%;
-	width:25%;
-	height:15%;
-}
-div#note3
-{
-	left:65%;
-	top:80%;
-	width:25%;
-	height:15%;
-}
-div#note1 textarea, div#note2 textarea, div#note3 textarea
-{
-	width:100%;
-	height:100%;
+	width:calc(100% - 20px);
+	height:calc(100% - 20px);
+	padding:10px;
 	background:var(--bg-color-b);
 	resize:none;
 	font-family:'Pompiere';
-	font-size:1vw;
+	font-size:2vw;
 }
 div#options
 {
