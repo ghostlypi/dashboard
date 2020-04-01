@@ -1,0 +1,910 @@
+@import url('https://fonts.googleapis.com/css?family=Muli|Roboto+Mono');
+
+* {
+	font-family:'Muli';
+}
+
+html, body {
+	margin:0;
+	padding:0;
+	width:100%;
+	height:100%;
+	overflow:hidden;
+}
+
+div.screen {
+	float:left;
+	width:100%;
+	height:0px;
+	visibility:hidden;
+	transition:all .5s;
+}
+
+div.screen.active {
+	height:100%;
+	visibility:visible;
+}
+
+div#schedule-events {
+	position:absolute;
+	visibility:hidden;
+	left:0vw;
+	top:50vh;
+	width:calc(20vw - 50px);
+	height:50vh;
+	padding:0px 25px;
+}
+
+div#schedule-events * {
+	visibility:inherit;
+}
+
+div#schedule-events section.subwindow {
+	float:left;
+	width:100%;
+	height:0px;
+	z-index:-1000;
+	font-size:1vw;
+}
+
+div#schedule-events section.subwindow.active {
+	height:100%;
+	z-index:1;
+}
+
+div#schedule-events h1 {
+	float:left;
+	margin:calc(7.5vh + 5px) 5px 5px 5px;
+	width:calc(20vw - 60px);
+	height:calc(15% - 10px);
+	color:white;
+	font-size:1.25vw;
+}
+
+div#schedule-events textarea {
+	float:left;
+	margin:2.5px;
+	width:calc(100% - 15px);
+	height:calc(10% - 5px);
+	background:#2c3e50;
+	color:white;
+	-webkit-resize:none;
+	-moz-resize:none;
+	-ms-resize:none;
+	-o-resize:none;
+	resize:none;
+	border:0;
+	outline:0;
+	padding:0px 5px;
+	line-height:calc(5vh - 5px);
+	font-size:0.75vw;
+}
+
+div#schedule-events div#input-text {
+	float:left;
+	margin:5px;
+	border:0;
+	outline:0;
+	padding:0;
+	width:calc(50% - 10px);
+	height:calc(10% - 10px);
+	color:white;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+div#schedule-events input {
+	float:left;
+	margin:5px;
+	border:0;
+	outline:0;
+	padding:0;
+	width:calc(50% - 10px);
+	height:calc(10% - 10px);
+	background:#2c3e50;
+	color:white;
+	font-size:0.75vw;
+}
+
+div#schedule-events div#check-container {
+	float:left;
+	width:100%;
+	height:10%;
+}
+
+div#schedule-events div#check-container input {
+	float:left;
+	border:0;
+	margin:0;
+	outline:0;
+	padding:0;
+	width:calc(100% / 7);
+	height:100%;
+}
+
+div#schedule-events div#letters-container {
+	float:left;
+	width:100%;
+	height:10%;
+}
+
+div#schedule-events div#letters-container div.letter {
+	float:left;
+	width:calc(100% / 7);
+	height:100%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	color:white;
+}
+
+div#schedule-events div#repeating {
+	float:left;
+	width:100%;
+	height:10%;
+}
+
+div#schedule-events div#repeating div#repeating-text {
+	float:left;
+	width:50%;
+	height:100%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	color:white;
+}
+
+div#schedule-events div#repeating select {
+	float:left;
+	width:50%;
+	height:100%;
+	margin:0;
+	border:0;
+	padding:0;
+	outline:0;
+}
+
+div#schedule-events section#event-information-subwindow button#event-information-exit {
+	float:left;
+	border:0;
+	outline:0;
+	margin:10px;
+	padding:0;
+	width:calc(50% - 20px);
+	height:calc(10% - 20px);
+	background:#2c3e50;
+	color:white;
+	transition:background .5s;
+}
+
+div#schedule-events section#event-information-subwindow button#event-information-next {
+	float:left;
+	border:0;
+	outline:0;
+	margin:10px;
+	padding:0;
+	width:calc(50% - 20px);
+	height:calc(10% - 20px);
+	background:#2c3e50;
+	color:white;
+	transition:background .5s;
+}
+
+div#schedule-events button#event-information-exit:hover {
+	background:#1b2d40;
+}
+
+div#schedule-events button#event-information-next:hover {
+	background:#1b2d40;
+}
+
+div#schedule-events section#event-options button {
+	float:left;
+	margin:5px;
+	width:calc(100% - 10px);
+	height:calc(20% - 10px);
+	background:#2c3e50;
+	color:white;
+	transition:background .5s;
+	border:0;
+	outline:0;
+	padding:0;
+	font-size:1.25vw;
+}
+
+div#schedule-events section#event-options button:hover {
+	background:#1b2d40;
+}
+
+div#remove-events {
+	position:absolute;
+	visibility:hidden;
+	top:50%;
+	left:0;
+	width:calc(20% - 50px);
+	height:50%;
+	padding:0px 25px;
+}
+
+div#remove-events * {
+	visibility:inherit;
+}
+
+div#remove-events section.subwindow {
+	float:left;
+	width:100%;
+	height:0px;
+	z-index:-1000;
+}
+
+div#remove-events section.subwindow.active {
+	height:50vh;
+	z-index:1;
+}
+
+div#remove-events h1 {
+	float:left;
+	width:100%;
+	height:20%;
+	margin:0;
+	padding:0;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	color:white;
+	font-size:1vw;
+}
+
+div#remove-events p {
+	color:white;
+}
+
+div#remove-events button {
+	float:left;
+	margin:5px;
+	width:calc(100% - 10px);
+	height:calc(20% - 10px);
+	background:#2c3e50;
+	color:white;
+	transition:background .5s;
+	border:0;
+	outline:0;
+	padding:0;
+	font-size:1.25vw;
+}
+
+div#remove-events button:hover {
+	background:#1b2d40;
+}
+
+div#event-information {
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	border-radius:10px;
+	background:#ecf0f1;
+	color:white;
+}
+
+div#event-information.hidden {
+	visibility:hidden;
+}
+
+div#event-information.shown {
+	visibility:visible;
+	z-index:1000;
+}
+
+div#event-information h1#event-name {
+	float:left;
+	width:100%;
+	height:10%;
+	margin:0;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	background:#9b59b6;
+}
+
+div#event-information p#event-day {
+	float:left;
+	width:calc(100% / 3);
+	height:10%;
+	margin:0;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	background:#8e44ad;
+	font-size:150%;
+}
+
+div#event-information input#event-start {
+	float:left;
+	width:calc(100% / 3);
+	height:10%;
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	text-align:center;
+	background:#8e44ad;
+	color:inherit;
+	font-size:150%;
+}
+
+div#event-information input#event-end {
+	float:left;
+	width:calc(100% / 3);
+	height:10%;
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	text-align:center;
+	background:#8e44ad;
+	color:inherit;
+	font-size:150%;
+}
+
+div#event-information button#event-quit {
+	position:absolute;
+	left:90%;
+	top:0px;
+	width:10%;
+	height:10%;
+	background:#e74c3c;
+	color:white;
+	transition:background .5s;
+	border:0;
+	outline:0;
+	font-family:'Roboto Mono';
+	font-size:150%;
+}
+
+div#event-information button#event-quit:hover {
+	background:#f85d4d;
+}
+
+div#calendar-import {
+	overflow-y:scroll;
+}
+
+div#calendar-import button.calendar-option {
+	float:left;
+	margin:5px;
+	width:calc(25% - 10px);
+	height:calc(15% - 10px);
+	background:#e74c3c;
+	color:white;
+	font-size:1vw;
+	border:0;
+	outline:0;
+}
+
+div#calendar-import button.calendar-option.selected {
+	background:#2ecc71;
+}
+
+div#calendar-import button#go {
+	float:left;
+	margin:5px;
+	width:calc(100% - 10px);
+	height:calc(10% - 10px);
+	background:#9b59b6;
+	color:white;
+	font-size:2vw;
+	transition:background .5s;
+	border:0;
+	outline:0;
+}
+
+div#calendar-import button#go:hover {
+	background:#ac6ac7;
+}
+
+h1.title {
+	float:left;
+	width:100%;
+	height:50%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	background:#9b59b6;
+	color:white;
+	margin:0;
+}
+
+button#signingoogle {
+	margin:20vh 40vw;
+	width:20vw;
+	height:10vh;
+	background:#e74c3c;
+	color:white;
+	border:0;
+	outline:0;
+	font-size:150%;
+	transition:filter .5s;
+}
+
+button#signingoogle:hover {
+	filter:brightness(140%);
+}
+
+section#objectives {
+	float:left;
+	padding:0px 25px;
+	width:calc(20% - 50px);
+	height:100%;
+	background:#2c3e50;
+}
+
+section#calendar {
+	float:left;
+	width:80%;
+	height:100%;
+}
+
+section#todos {
+	float:left;
+	width:20%;
+	height:100%;
+	background:#cacaca;
+}
+
+div.days {
+	float:left;
+	width:100%;
+	height:10%;
+}
+
+div.days h1 {
+	float:right;
+	margin:10px;
+	width:calc(calc(100% / 8) - 20px);
+	height:calc(100% - 20px);
+	background:#9b59b6;
+	color:white;
+	font-weight:normal;
+	font-size:1vw;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+div.rows {
+	float:left;
+	width:100%;
+	height:90%;
+	overflow-y:scroll;
+}
+
+div#times {
+	float:left;
+	width:calc(100% / 8);
+	height:100%;
+}
+
+div#times div.time {
+	float:left;
+	width:100%;
+	height:20%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+div.row {
+	float:left;
+	width:calc(100% / 8);
+	height:100%;
+}
+
+div.row ul {
+	position:relative;
+	float:left;
+	width:100%;
+	height:100%;
+	list-style-type:none;
+	padding:0;
+	overflow-y:visible;
+}
+
+li.event {
+	position:absolute;
+	margin:2px;
+	width:calc(10vw - 4px);
+}
+
+li.event div.event-name {
+	float:left;
+	padding:2px 4px;
+	width:calc(100% - 12px);
+	height:calc(50% - 8px);
+	outline:0;
+	resize:none;
+	background:#2ecc71;
+	color:black;
+	display:flex;
+	font-size:0.65vw;
+	overflow-y:hidden;
+	border-radius:10px;
+	border:solid 2px black;
+
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	-o-user-select:none;
+	user-select:none;
+}
+
+li.event div.event-name.generated {
+	background:#e67e22;
+}
+
+li.event button.event-remove {
+	float:left;
+	width:calc(2vw - 10px);
+	height:50%;
+	border:0;
+	outline:0;
+	background:grey;
+	color:white;
+	font-size:100%;
+	filter:brightness(110%);
+	transition:all .5s;
+}
+
+li.event button.event-remove:hover {
+	filter:brightness(140%);
+}
+
+textarea#todo-name {
+	float:left;
+	margin:10px 0px 10px 10px;
+	width:calc(80% - 10px);
+	height:calc(10% - 20px);
+	background:#9b59b6;
+	border:0;
+	outline:0;
+	padding:0;
+	resize:none;
+	text-align:center;
+	line-height:calc(10vh - 20px);
+	color:white;
+	font-size:200%;
+	overflow:hidden;
+	white-space:nowrap;
+}
+
+textarea#todo-name::placeholder {
+	color:lightgrey;
+}
+
+button#todo-add {
+	float:left;
+	margin:10px 10px 10px 0px;
+	width:calc(20% - 10px);
+	height:calc(10% - 20px);
+	background:#9b59b6;
+	filter:brightness(110%);
+	border:0;
+	outline:0;
+	color:white;
+	font-size:200%;
+	transition:all .5s;
+}
+
+button#todo-add:hover {
+	filter:brightness(140%);
+}
+
+ul#todo-list {
+	float:left;
+	width:100%;
+	height:80%;
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	overflow-y:scroll;
+}
+
+button#deploy-todos {
+	float:left;
+	margin:10px;
+	width:calc(100% - 20px);
+	height:calc(10% - 20px);
+	background:#9b59b6;
+	filter:brightness(110%);
+	border:0;
+	outline:0;
+	color:white;
+	font-size:100%;
+	transition:all .5s;
+}
+
+button#deploy-todos:hover {
+	filter:brightness(140%);
+}
+
+li.todo {
+	float:left;
+	margin:10px;
+	width:calc(20vw - 20px);
+	height:calc(23% - 20px);
+}
+
+li.todo textarea.todo-name {
+	float:left;
+	width:calc(16vw - 10px);
+	height:50%;
+	border:0;
+	outline:0;
+	resize:none;
+	padding:0;
+	background:grey;
+	color:white;
+	text-align:center;
+	line-height:calc(10vh - 10px);
+	font-size:200%;
+	white-space:nowrap;
+}
+
+li.todo textarea.todo-name::placeholder {
+	color:lightgrey;
+}
+
+li.todo button.todo-remove {
+	float:left;
+	width:calc(4vw - 10px);
+	height:50%;
+	border:0;
+	outline:0;
+	background:grey;
+	color:white;
+	font-size:150%;
+	filter:brightness(110%);
+	transition:all .5s;
+}
+
+li.todo button.todo-remove:hover {
+	filter:brightness(140%);
+}
+
+li.todo h1.todo-length-info {
+	float:left;
+	width:calc(10vw - 10px);
+	height:50%;
+	font-size:100%;
+	text-align:center;
+	display:flex;
+	align-items:center;
+	background:grey;
+	margin:0;
+	padding:0;
+	color:white;
+	font-weight:normal;
+}
+
+li.todo input.todo-length {
+	float:left;
+	width:calc(10vw - 10px);
+	height:50%;
+	background:grey;
+	padding:0;
+	border:0;
+	outline:0;
+	filter:brightness(120%);
+	text-align:center;
+	font-size:150%;
+	color:white;
+}
+
+li.todo input.todo-length::-webkit-datetime-edit-ampm-field {
+	display:none;
+}
+
+li.todo input.todo-length::-webkit-clear-button {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-o-appearance: none;
+	-ms-appearance:none;
+	appearance: none;
+	margin: -10px; 
+}
+
+section#objectives {
+	color:white;
+}
+
+section#objectives h1 {
+	float:left;
+	width:100%;
+	height:10%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+section#objectives ul#objectives-list {
+	list-style-type:none;
+	padding:0;
+}
+
+section#objectives ul#objectives-list li {
+	float:left;
+	background:#34495e;
+	margin:1vh 0;
+	padding:0px 10px;
+	width:calc(100% - 20px);
+	height:8vh;
+	display:flex;
+	align-items:center;
+	transition:all .5s;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	-o-user-select:none;
+	user-select:none;
+	font-size:1vw;
+}
+
+section#objectives ul#objectives-list li:hover {
+	background:#455a6f;
+}
+
+div.objective {
+	transition:width .5s;
+	position:absolute;
+	top:0px;
+	left:20vw;
+	width:0vw;
+	height:100%;
+	visibility:hidden;
+	background:#34495e;
+	z-index:100;
+}
+
+div.objective.shown {
+	width:80vw;
+	visibility:visible;
+}
+
+/*
+section.subwindow {
+	transition:width .5s;
+	position:relative;
+	float:left;
+	width:0vw;
+	height:100%;
+	visibility:hidden;
+}
+
+section.subwindow.active {
+	width:80vw;
+	visibility:visible;
+}
+
+section.subwindow h1 {
+	float:left;
+	margin:0;
+	padding:0px 10vw;
+	width:60vw;
+	padding-top:10vh;
+	height:10vh;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	color:white;
+}
+
+
+
+section.subwindow button.prev {
+	position:absolute;
+	top:90%;
+	left:5%;
+	width:15%;
+	height:5%;
+	background:#2c3e50;
+	border:0;
+	outline:0;
+	color:white;
+	transition:background .5s;
+	font-size:175%;
+}
+
+section.subwindow button.next {
+	position:absolute;
+	top:90%;
+	left:75%;
+	width:15%;
+	height:5%;
+	background:#2c3e50;
+	border:0;
+	outline:0;
+	color:white;
+	transition:background .5s;
+	font-size:175%;
+}
+
+section.subwindow button.back {
+	position:absolute;
+	top:5%;
+	left:5%;
+	width:15%;
+	height:5%;
+	background:#2c3e50;
+	border:0;
+	outline:0;
+	color:white;
+	transition:background .5s;
+	font-size:175%;
+}
+
+section.subwindow button:hover {
+	background:#1b2d40;
+}
+
+section.subwindow#time-optimization-activities ul {
+	float:left;
+	margin:5vh 10vw;
+	padding:0;
+	width:60vw;
+	height:60vh;
+	list-style-type:none;
+	overflow-y:scroll;
+}
+
+section.subwindow#time-optimization-activities ul li {
+	float:left;
+	margin:2px;
+	padding:20px;
+	width:calc(12.5% - 44px);
+	height:calc(30% - 44px);
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	background:#2c3e50;
+	color:white;
+}
+
+section.subwindow#time-optimization-action ul {
+	float:left;
+	margin:5vh 10vw;
+	padding:0;
+	width:60vw;
+	height:60vh;
+	list-style-type:none;
+	overflow-y:scroll;
+}
+
+section.subwindow#time-optimization-action ul li {
+	float:left;
+	margin:2px;
+	padding:20px;
+	width:calc(12.5% - 44px);
+	height:calc(30% - 44px);
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	background:#2c3e50;
+	color:white;
+	transition:background .5s;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	-o-user-select:none;
+	user-select:none;
+}
+
+section.subwindow#time-optimization-action ul li:hover {
+	background:#3d4f61;
+}
+
+section.subwindow#time-optimization-action ul li.selected {
+	background:#3d4f61;
+}
+*/

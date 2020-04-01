@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css?family=Muli');
+
+html, body {
+	margin:0;
+	padding:0;
+	width:100%;
+	height:100%;
+	overflow:hidden;
+}
+
+h1 {
+	float:left;
+	width:calc(60% - 40px);
+	height:calc(10% - 40px);
+	margin:10px calc(10px + 20vw);
+	margin-top:calc(10px + 10vh);
+	color:black;
+	font-family:'Muli';
+	font-size:200%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+p {
+	width:calc(60% - 40px);
+	height:calc(40% - 40px);
+	margin:calc(10px + 20vh) calc(10px + 20vw);
+	color:black;
+	font-family:'Muli';
+	font-size:200%;
+	display:flex;
+	justify-content:center;
+}

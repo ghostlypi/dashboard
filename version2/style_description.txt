@@ -1,0 +1,5 @@
+font = Muli
+primary_color = #9b59b6
+secondary_color = white
+tertiary_color = grey
+google_signin = #e74c3c

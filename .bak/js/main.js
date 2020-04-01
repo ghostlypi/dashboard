@@ -143,7 +143,12 @@ window.onload = () =>
 	const save = _ => {
 	    var dashboardData = {
 	      'color': cls('clr-fg')[0].style.color || '#fff',
-	      'notes': id('notes').childNodes[0].value || '',
+	      'note1': id('note1').childNodes[0].value || '',
+	      'note2': id('note2').childNodes[0].value || '',
+	      'note3': id('note3').childNodes[0].value || '',
+	      'name': id('name').children[0].value || '',
+	      'height': id('height').children[0].value || '',
+	      'age': id('age').children[0].value || '',
 	      'goals': [],
 	      'tasks': []
 	    };
@@ -171,7 +176,12 @@ window.onload = () =>
 	    var data = JSON.parse(localStorage.dashboardData);
 
 	    setColor(data.color);
-			id('notes').childNodes[0].value = data.notes || '';
+	    id('note1').childNodes[0].value = data.note1 || '';
+	    id('note2').childNodes[0].value = data.note2 || '';
+	    id('note3').childNodes[0].value = data.note3 || '';
+	    id('name').children[0].value = data.name || '';
+	    id('height').children[0].value = data.height || '';
+	    id('age').children[0].value = data.age || '';
 
 	    for(var i = 0; i < 10; i++) {
 	      cls('goal')[i].value = data.goals[i].name || '';
@@ -229,7 +239,7 @@ window.onload = () =>
 		clearInterval(tasks[idx]);
 	});
 
-	let ctrl = false;
+	let ctrl = true;
 	let settingsOpen = false;
 	window.onkeyup = function(e){if(e.keyCode === 17){ctrl = false;}};
 	window.onkeydown = function(e){
@@ -274,30 +284,4 @@ window.onload = () =>
 			[].forEach.call(cls('cell'),function(c){c.style.boxShadow = '5px 5px rgba(0, 0, 0, 0.3)';});
 		}
 	};
-
-	(function() {
-		var calendar_canvas = document.getElementById('calendar-inner');
-		var calendar_context = calendar_canvas.getContext('2d');
-		function resize() {
-			calendar_canvas.width = window.innerWidth * 0.25;
-			calendar_canvas.height = window.innerHeight * 0.4;
-		}
-		resize();
-		window.onresize = resize;
-		setInterval(function() {
-			calendar_context.fillStyle = getComputedStyle(tag('html')[0]).getPropertyValue('--bg-color-b');
-			calendar_context.fillRect(0, 0, calendar_canvas.width, calendar_canvas.height);
-			calendar_context.fillStyle = cls('clr-fg')[0].style.color;
-			for(var i=0;i<7;i++) {
-				calendar_context.fillRect(calendar_canvas.width * i / 7 + 3, 3, calendar_canvas.width / 7 - 6, calendar_canvas.height / 15 - 6);
-			}
-			calendar_context.fillStyle = getComputedStyle(tag('html')[0]).getPropertyValue('--bg-color-b');
-			calendar_context.textAlign = 'center';
-			calendar_context.textBaseline = 'middle';
-			calendar_context.font = '12px Ubuntu Mono';
-			for(var i=0;i<7;i++) {
-				calendar_context.fillText('MTWTFSS'.split('')[i], calendar_canvas.width * (i + 0.5) / 7, calendar_canvas.height / 30);
-			}
-		}, 1000/30);
-	})();
 };
