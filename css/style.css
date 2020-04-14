@@ -299,13 +299,15 @@ div#profile aside img {
 	border-radius:6px;
 }
 
-div#profile article h1 {
+div#profile article div {
 	float:left;
 	margin:5px;
 	padding:0;
 	width:calc(100% - 10px);
 	height:calc(50% - 10px);
-	text-align:center;
+	display:flex;
+	justify-content:center;
+	align-items:center;
 }
 
 div#profile article button {

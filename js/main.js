@@ -275,7 +275,7 @@ window.onload = () =>
 		}
 	};
 
-	(function() {
+	/*(function() {
 		var calendar_canvas = document.getElementById('calendar-inner');
 		var calendar_context = calendar_canvas.getContext('2d');
 		function resize() {
@@ -299,5 +299,5 @@ window.onload = () =>
 				calendar_context.fillText('MTWTFSS'.split('')[i], calendar_canvas.width * (i + 0.5) / 7, calendar_canvas.height / 30);
 			}
 		}, 1000/30);
-	})();
+	})();*/
 };
