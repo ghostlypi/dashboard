@@ -29,6 +29,8 @@ var panchrometer_add_event;
 var panchrometer_add_event_starttime;
 var panchrometer_add_event_endtime;
 
+var panchrometer_temporary_event = undefined;
+
 panchrometer_settings.minTodoStartTime.setHours(11);
 panchrometer_settings.minTodoStartTime.setMinutes(0);
 panchrometer_settings.maxTodoStartTime.setHours(22);
@@ -238,15 +240,18 @@ function createEvent(name, startTime, endTime, day, half, type__) {
 	event.style.top = (20 * yPos) + '%';
 	var size = (endTime.getHours() * 60 + endTime.getMinutes()) - (startTime.getHours() * 60 + startTime.getMinutes());
 	size = Math.max(20, size);
+	if(type__ === 'temporary') {
+		event.children[0].style.background = '#e67e22';
+	}
 	event.style.height = 'calc(' + (20 * size / 60) + '% - 4px)';
 	event.children[0].innerHTML = name + ((type__ === 'generated') ? ' (generated)' : '');
 	//event.children[1].onclick = function() { this.parentElement.parentElement.removeChild(this.parentElement); }
 	event.startTime = format(startTime.getHours()) + ':' + format(startTime.getMinutes());
 	event.endTime = format(endTime.getHours()) + ':' + format(endTime.getMinutes());
-	event.day = day;
-	event.onclick = function() {
+	event.day = (day + 1) % 7;
+	event.onclick = function(ev) {
 		document.getElementById('event-name').innerHTML = name;
-		document.getElementById('event-day').innerHTML = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][day];
+		document.getElementById('event-day').innerHTML = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][event.day];
 		document.getElementById('event-start').value = this.startTime;
 		document.getElementById('event-end').value = this.endTime;
 
@@ -256,12 +261,18 @@ function createEvent(name, startTime, endTime, day, half, type__) {
 	if(type__ === 'generated') {
 		event.children[0].classList.add('generated');
 	}
+	if(type__ === 'temporary') {
+		panchrometer_temporary_event = event;
+	}
 	panchrometer_events.push(event);
 	return event;
 }
 
 function panchrometerAddEvent(name, startTime, endTime, half=false, type='normal') {
 	var day = (startTime.getDay() === 0) ? 6 : startTime.getDay() - 1;
+	if(type === 'temporary') {
+		day = (startTime.getDay() + 1) % 7;
+	}
 	[...document.getElementsByClassName('row')][day].children[0].appendChild(createEvent(name, startTime, endTime, day, half, type));
 }
 
@@ -431,7 +442,17 @@ document.getElementById('event-information-next').onclick = function() {
 
 	[panchrometer_add_event_starttime, panchrometer_add_event_endtime] = panchrometer_find_time();
 	if(panchrometer_add_event_starttime == NaN || panchrometer_add_event_endtime == NaN) {
-		// TODO: this
+		document.getElementById('wouldthiswork').innerHTML = 'Sorry, there are no possible times for this event.';
+		document.getElementById('event-options-yes').style.visibility = 'hidden';
+		document.getElementById('event-options-no').style.visibility = 'hidden';
+		var old_back_function = document.getElementById('event-options-back').onclick;
+		document.getElementById('event-options-back').onclick = function(ev) {
+			document.getElementById('wouldthiswork').innerHTML = 'Would this work?';
+			document.getElementById('event-options-yes').style.visibility = 'inherit';
+			document.getElementById('event-options-no').style.visibility = 'inherit';
+			old_back_function(ev);
+			document.getElementById('event-options-back').onclick = old_back_function;
+		};
 	}
 	else {
 		panchrometer_display_temporary_event();
@@ -453,12 +474,32 @@ document.getElementById('event-options-yes').onclick = function() {
 document.getElementById('event-options-next').onclick = function() {
 	[panchrometer_add_event_starttime, panchrometer_add_event_endtime] = panchrometer_find_time(panchrometer_add_event_starttime, panchrometer_add_event_endtime);
 	if(panchrometer_add_event_starttime == NaN || panchrometer_add_event_endtime == NaN) {
-		// TODO: this
+		[panchrometer_add_event_starttime, panchrometer_add_event_endtime] = panchrometer_find_time();
 	}
-	else {
-		panchrometer_display_temporary_event();
-	}
+	panchrometer_display_temporary_event();
 };
+
+function panchrometer_apply_temporary_event() {
+	
+	// TODO: this
+}
+
+function panchrometer_display_temporary_event() {
+	if(typeof panchrometer_temporary_event !== 'undefined') {
+		if(panchrometer_events.indexOf(panchrometer_temporary_event) !== -1) {
+			panchrometer_events.splice(panchrometer_events.indexOf(panchrometer_temporary_event), 1);
+		}
+		panchrometer_temporary_event.parentElement.removeChild(panchrometer_temporary_event);
+	}
+	for(var i=0;i<panchrometer_add_event.days.length;i++) {
+		if(panchrometer_add_event.days[i]) {
+			var dayIndex = (i + 1) % 7;
+			var start = new Date(new Date().getYear(), new Date().getMonth(), new Date().getDate() + (dayIndex - new Date().getDay()), Math.floor(panchrometer_add_event_starttime / 60), panchrometer_add_event_starttime % 60, 0, 0);
+			var end = new Date(new Date().getYear(), new Date().getMonth(), new Date().getDate() + (dayIndex - new Date().getDay()), Math.floor(panchrometer_add_event_endtime / 60), panchrometer_add_event_endtime % 60, 0, 0);
+			panchrometerAddEvent(panchrometer_add_event.name, start, end, half=false, type='temporary');
+		}
+	}
+}
 
 document.getElementById('remove-events-button').onclick = function() {
 	document.getElementById('remove-events').style.visibility = 'visible';

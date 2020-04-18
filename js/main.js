@@ -1,5 +1,20 @@
 window.onload = () =>
 {
+	// Your web app's Firebase configuration
+	var firebaseConfig = {
+		apiKey: "AIzaSyCPEZPVqnuhaZklOo7pt4QzVNtEuOBXJm4",
+		authDomain: "dashb-64318.firebaseapp.com",
+		databaseURL: "https://dashb-64318.firebaseio.com",
+		projectId: "dashb-64318",
+		storageBucket: "dashb-64318.appspot.com",
+		messagingSenderId: "96183954238",
+		appId: "1:96183954238:web:a1944bdf6add082be8da6f",
+		measurementId: "G-27L0H86R4T"
+	};
+	// Initialize Firebase
+	firebase.initializeApp(firebaseConfig);
+	firebase.analytics();
+
 	function id(i){return document.getElementById(i);}
 	function cls(c){return document.getElementsByClassName(c);}
 	function tag(t){return document.getElementsByTagName(t);}
@@ -275,29 +290,14 @@ window.onload = () =>
 		}
 	};
 
-	/*(function() {
-		var calendar_canvas = document.getElementById('calendar-inner');
-		var calendar_context = calendar_canvas.getContext('2d');
-		function resize() {
-			calendar_canvas.width = window.innerWidth * 0.25;
-			calendar_canvas.height = window.innerHeight * 0.4;
+	id('username').onclick = function() {
+		id('username').contentEditable = true;
+	};
+
+	id('username').onkeydown = function(ev) {
+		if(ev.keyCode === 13) {
+			ev.preventDefault();
+			id('username').contentEditable = false;
 		}
-		resize();
-		window.onresize = resize;
-		setInterval(function() {
-			calendar_context.fillStyle = getComputedStyle(tag('html')[0]).getPropertyValue('--bg-color-b');
-			calendar_context.fillRect(0, 0, calendar_canvas.width, calendar_canvas.height);
-			calendar_context.fillStyle = cls('clr-fg')[0].style.color;
-			for(var i=0;i<7;i++) {
-				calendar_context.fillRect(calendar_canvas.width * i / 7 + 3, 3, calendar_canvas.width / 7 - 6, calendar_canvas.height / 15 - 6);
-			}
-			calendar_context.fillStyle = getComputedStyle(tag('html')[0]).getPropertyValue('--bg-color-b');
-			calendar_context.textAlign = 'center';
-			calendar_context.textBaseline = 'middle';
-			calendar_context.font = '12px Ubuntu Mono';
-			for(var i=0;i<7;i++) {
-				calendar_context.fillText('MTWTFSS'.split('')[i], calendar_canvas.width * (i + 0.5) / 7, calendar_canvas.height / 30);
-			}
-		}, 1000/30);
-	})();*/
+	};
 };
