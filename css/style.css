@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Pompiere');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
 
 * {
 	margin:0;
@@ -27,11 +29,38 @@ html,body {
 	visibility:visible;
 }
 
-#signin > h1, #signin > h3 {
-	text-align:center;font-family:'Ubuntu Mono';
+#signin h1, #signin h3 {
+	text-align:center;font-family:'Titillium Web';
 }
 
-#signin > h1 {
+#signin div.half {
+	float:left;
+	width:50%;
+	height:100%;
+}
+
+#signin div.half#btn-container {
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+#signin div.half#btn-container button {
+	background:#aa3333;
+	color:white;
+	border-radius:5px;
+	width:30vw;
+	height:10vh;
+	font-family:'Titillium Web';
+	font-size:14pt;
+	transition:background .5s;
+}
+
+#signin div.half#btn-container button:hover {
+	background:#dd0000;
+}
+
+#signin h1 {
 	width:100%;
 	height:50%;
 	font-size:5em;
@@ -40,7 +69,7 @@ html,body {
 	align-items:center;
 }
 
-#signin > h3 {
+#signin h3 {
 	font-size:3em;
 	width:100%;
 	height:25%;
@@ -78,7 +107,7 @@ div#title
 	top:5%;
 	width:25%;
 	height:15%;
-	font-family:'Ubuntu Mono';
+	font-family:'Titillium Web';
 	font-size:2em;
 	text-align:center;
 
@@ -166,7 +195,7 @@ li.task
 }
 textarea.task-name
 {
-	font-family:'Ubuntu Mono';
+	font-family:'Titillium Web';
 	font-size:1.5vw;
 	float:left;
 	background:var(--bg-color-b);
@@ -178,7 +207,7 @@ textarea.task-name
 }
 textarea.task-time
 {
-	font-family:'Ubuntu Mono';
+	font-family:'Titillium Web';
 	font-size:1.00vw;
 	float:left;
 	background:var(--bg-color-b);
@@ -190,7 +219,7 @@ textarea.task-time
 }
 li.task button
 {
-	font-family:'Ubuntu Mono';
+	font-family:'Titillium Web';
 	font-size:.5vw;
 	float:left;
 	width:10%;
@@ -218,7 +247,7 @@ div#top textarea
 	height:100%;
 	background:var(--bg-color-b);
 	resize:none;
-	font-family:'Ubuntu Mono';
+	font-family:'Titillium Web';
 	font-size:2vw;
 }
 div#top button
@@ -274,7 +303,7 @@ div#profile
 	top:5%;
 	width:25%;
 	height:16%;
-	font-family:'Ubuntu Mono';
+	font-family:'Titillium Web';
 	font-size:1.1vw;
 }
 
@@ -344,7 +373,6 @@ div#goal2
 	height:calc(15% - 20px);
 	padding:10px;
 }
-div#goal2 ol li textarea.goal {font-size:1.25vw;}
 div.div-goal ol
 {
 	width:100%;
@@ -363,8 +391,8 @@ textarea.goal
 	resize:none;
 	width:70%;
 	height:100%;
-	font-family:'Ubuntu Mono';
-	font-size:1.5vw;
+	font-family:'Titillium Web';
+	font-size:1vw;
 }
 input.input
 {
@@ -373,7 +401,7 @@ input.input
 	resize:none;
 	width:100%;
 	height:2%;
-	font-family:'Ubuntu Mono';
+	font-family:'Titillium Web';
 	font-size:1.6vw;
 }
 svg
@@ -390,8 +418,8 @@ textarea.percent
 	background:var(--bg-color-c);
 	resize:none;
 	text-align:center;
-	font-family:'Ubuntu Mono';
-	font-size:1.3vw;
+	font-family:'Titillium Web';
+	font-size:1vw;
 
 	-webkit-touch-callout:none;
 	  -webkit-user-select:none;
@@ -479,7 +507,7 @@ ol#settings>li{
 	width:50%;
 	height:100%;
 	font-size:2em;
-	font-family:'Ubuntu Mono';
+	font-family:'Titillium Web';
 	background:transparent;
 	color:#fff;
 }

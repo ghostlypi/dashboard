@@ -29,6 +29,8 @@ var panchrometer_add_event;
 var panchrometer_add_event_starttime;
 var panchrometer_add_event_endtime;
 
+var authorization_successful = false;
+
 var panchrometer_temporary_event = undefined;
 
 panchrometer_settings.minTodoStartTime.setHours(11);
@@ -43,6 +45,18 @@ var lastHalfOnTheLeft = true;
  */
 function handleClientLoad() {
 	gapi.load('client:auth2', initClient);
+	// https://gist.github.com/teghoz/43e63fd3c3a309454732
+	window.setTimeout(checkAuth, 1);
+}
+
+function checkAuth() {
+	gapi.auth.authorize({client_id: CLIENT_ID, scope: SCOPES, immediate: true}, handleAuthResult);
+}
+
+function handleAuthResult(authResult) {
+	if(authResult && !authResult.error) {
+		authorization_successful = true;
+	}
 }
 
 /**
@@ -213,12 +227,6 @@ function panchrometerDeployTodos() {
 	}
 }
 
-/*
-document.getElementById('deploy-todos').onclick = function() {
-	panchrometerDeployTodos();
-};
-*/
-
 function format(number) {
 	return (number < 10) ? '0' + number : '' + number;
 }
@@ -249,6 +257,8 @@ function createEvent(name, startTime, endTime, day, half, type__) {
 	event.startTime = format(startTime.getHours()) + ':' + format(startTime.getMinutes());
 	event.endTime = format(endTime.getHours()) + ':' + format(endTime.getMinutes());
 	event.day = (day + 1) % 7;
+	event.name = name;
+	event.type = type__;
 	event.onclick = function(ev) {
 		document.getElementById('event-name').innerHTML = name;
 		document.getElementById('event-day').innerHTML = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][event.day];
@@ -480,8 +490,87 @@ document.getElementById('event-options-next').onclick = function() {
 };
 
 function panchrometer_apply_temporary_event() {
-	
-	// TODO: this
+	// https://developers.google.com/calendar/create-events#javascript
+	if(typeof panchrometer_temporary_event === 'undefined') {
+		return;
+	}
+
+	// https://stackoverflow.com/questions/9149556/how-to-get-utc-offset-in-javascript-analog-of-timezoneinfo-getutcoffset-in-c
+	function pad(value) {
+    return value < 10 ? '0' + value : value;
+	}
+	function createOffset(date) {
+			var sign = (date.getTimezoneOffset() > 0) ? "-" : "+";
+			var offset = Math.abs(date.getTimezoneOffset());
+			var hours = pad(Math.floor(offset / 60));
+			var minutes = pad(offset % 60);
+			return sign + hours + ":" + minutes;
+	}
+
+	var dayIndex = (panchrometer_add_event.days.indexOf(true) + 1) % 7;
+	var start = new Date(new Date().getYear(), new Date().getMonth(), new Date().getDate() + (dayIndex - new Date().getDay()), Math.floor(panchrometer_add_event_starttime / 60), panchrometer_add_event_starttime % 60, 0, 0);
+	var end = new Date(new Date().getYear(), new Date().getMonth(), new Date().getDate() + (dayIndex - new Date().getDay()), Math.floor(panchrometer_add_event_endtime / 60), panchrometer_add_event_endtime % 60, 0, 0);
+
+	var frequency_recurrence_rule_dict = {
+		'D':'DAILY','W':'WEEKLY','M':'MONTHLY','A':'YEARLY'
+	};
+	var frequency_recurrence_rule = (panchrometer_add_event.repeating === 'N' ? '' : 'FREQ=' + frequency_recurrence_rule_dict[panchrometer_add_event.repeating]);
+
+	var week_recurrence_rule_list = ['MO','TU','WE','TH','FR','SA','SU'];
+	var week_recurrence_rule = week_recurrence_rule_list.filter(function(day) {
+		return panchrometer_add_event.days[week_recurrence_rule_list.indexOf(day)];
+	}).join(',');
+
+	var new_event = {
+		'summary':panchrometer_add_event.name,
+		'start':{
+			'dateTime':start.toISOString().split('.')[0] + createOffset(start),
+			// https://stackoverflow.com/questions/1091372/getting-the-clients-timezone-offset-in-javascript
+			'timeZone':Intl.DateTimeFormat().resolvedOptions().timeZone
+		},
+		'end':{
+			'dateTime':end.toISOString().split('.')[0] + createOffset(end),
+			// https://stackoverflow.com/questions/1091372/getting-the-clients-timezone-offset-in-javascript
+			'timeZone':Intl.DateTimeFormat().resolvedOptions().timeZone
+		},
+	};
+
+	if(frequency_recurrence_rule.length > 0 || week_recurrence_rule.length > 0) {
+		new_event.recurrence = [
+			'RRULE:' + (frequency_recurrence_rule.length > 0 ? 'FREQ=' + frequency_recurrence_rule : '') + (week_recurrence_rule.length > 0 ? (frequency_recurrence_rule.length > 0 ? ';BYDAY=' + week_recurrence_rule : 'BYDAY=' + week_recurrence_rule) : '')
+		]
+	}
+
+	if(authorization_successful) {
+		gapi.client.load('calendar', 'v3', function() {
+			// https://developers.google.com/calendar/v3/reference/events/insert
+			var request = gapi.client.calendar.events.insert({
+				'calendarId': panchrometer_calendar_ids[0],
+				'resource': new_event
+			})
+
+			//console.log(request.execute);
+
+			request.execute();
+
+			/*request.execute(function(event) {
+				console.log(event.htmlLink);
+			}).catch(function(error) {
+				//console.log(error);
+			});*/
+		});
+	}
+
+	for(var i=0;i<panchrometer_add_event.days.length;i++) {
+		if(panchrometer_add_event.days[i]) {
+			[...[...[...document.getElementsByClassName('row')][i].children][0].children].forEach(function(v) {
+				if(v.type === 'temporary') {
+					v.children[0].style.background = '#2ecc71';
+				}
+			});
+		}
+	}
+	panchrometer_temporary_event = undefined;
 }
 
 function panchrometer_display_temporary_event() {
@@ -534,85 +623,7 @@ document.getElementById('removal-back').onclick = function() {
 	});
 };
 
-/*
-document.getElementById('todo-add').onclick = function(ev) {
-	addTodo();
-};
-*/
-
-/*
-document.getElementById('todo-name').onkeydown = function(ev) {
-	if(ev.keyCode === 13) {
-		ev.preventDefault();
-		addTodo();
-	}
-}
-*/
-
 document.getElementById('event-quit').onclick = function(ev) {
 	document.getElementById('event-information').classList.remove('shown');
 	document.getElementById('event-information').classList.add('hidden');
 }
-
-/*
-document.getElementById('time-optimization-button').onclick = function() {
-	document.getElementById('time-optimization').classList.add('shown');
-	document.getElementById('time-optimization-activities').classList.add('active');
-
-	var names = {};
-	for(var i=0;i<panchrometer_events.length;i++) {
-		var ev = panchrometer_events[i];
-		if(typeof names[ev.children[0].innerHTML] === 'undefined') {
-			names[ev.children[0].innerHTML] = 0;
-		}
-		names[ev.children[0].innerHTML] += Math.abs(ev.endTime - ev.startTime) / 60000;
-	}
-
-	if(document.getElementById('activities').children.length === 0) {
-		for(var i=0;i<Object.keys(names).length;i++) {
-			var li = document.createElement('li');
-			li.classList.add('activity');
-			li.innerHTML = Object.keys(names)[i];
-			document.getElementById('activities').appendChild(li);
-		}
-	}
-
-
-	if(document.getElementById('activity-buttons').children.length === 0) {
-		for(var i=0;i<Object.keys(names).length;i++) {
-			var li = document.createElement('li');
-			li.classList.add('activity');
-			li.innerHTML = Object.keys(names)[i];
-			li.onclick = function() {
-				if(this.classList.contains('selected')) {
-					this.classList.remove('selected');
-				}
-				else {
-					this.classList.add('selected');
-				}
-			}
-			document.getElementById('activity-buttons').appendChild(li);
-		}
-	}
-};
-
-[...document.getElementsByClassName('back')].forEach(function(v) {
-	v.onclick = function() {
-		this.parentElement.classList.remove('active');
-		this.parentElement.parentElement.classList.remove('shown');
-	};
-});
-
-[...document.getElementsByClassName('prev')].forEach(function(v) {
-	v.onclick = function() {
-		this.parentElement.classList.remove('active');
-		this.parentElement.previousElementSibling.classList.add('active');
-	};
-});
-
-[...document.getElementsByClassName('next')].forEach(function(v) {
-	v.onclick = function() {
-		this.parentElement.classList.remove('active');
-		this.parentElement.nextElementSibling.classList.add('active');
-	};
-});*/

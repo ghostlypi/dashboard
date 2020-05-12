@@ -275,7 +275,7 @@ window.onload = () =>
 			}
 	};
 
-	id('signin').onclick = function(){
+	id('signingoogle').onclick = function(){
 		id('signin').style.visibility = 'hidden';
 		id('dashboard').style.visibility = 'visible';
 		[].forEach.call(id('dashboard').children,function(c){c.style.visibility = 'visible';});
@@ -299,5 +299,17 @@ window.onload = () =>
 			ev.preventDefault();
 			id('username').contentEditable = false;
 		}
+	};
+
+	id('user-settings').onclick = function() {
+		id('dashboard').style.filter = settingsOpen ? 'none' : 'blur(5px)';
+		id('settings').style.visibility = settingsOpen ? 'hidden' : 'visible';
+		settingsOpen = !settingsOpen;
+	};
+
+	id('user-logout').onclick = function() {
+		id('signin').style.visibility = 'visible';
+		id('dashboard').style.visibility = 'hidden';
+		[].forEach.call(id('dashboard').children,function(c){c.style.visibility = 'hidden';});
 	};
 };
