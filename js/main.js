@@ -1,5 +1,9 @@
 window.onload = () =>
 {
+	var user = {
+		'email':''
+	};
+
 	// Your web app's Firebase configuration
 	var firebaseConfig = {
 		apiKey: "AIzaSyCPEZPVqnuhaZklOo7pt4QzVNtEuOBXJm4",
@@ -19,17 +23,9 @@ window.onload = () =>
 	function cls(c){return document.getElementsByClassName(c);}
 	function tag(t){return document.getElementsByTagName(t);}
 
-	function parseLen(text)
-	{
-		return (-1 < text && text < 10) ? '0' + text : text;
-	}
+	function parseLen(text) { return (-1 < text && text < 10) ? '0' + text : text; }
 
-	const months =
-	[
-		'Jan','Feb','Mar','Apr',
-		'May','Jun','Jul','Aug',
-		'Sep','Oct','Nov','Dec'
-	];
+	const months = [ 'Jan','Feb','Mar','Apr', 'May','Jun','Jul','Aug', 'Sep','Oct','Nov','Dec' ];
 
 	const timeD = id('time');
 	const dateD = id('date');
@@ -275,11 +271,41 @@ window.onload = () =>
 			}
 	};
 
+	id('firebasecreateaccount').onclick = function() {
+		var email = id('email').value;
+		var passw = id('passw').value;
+		firebase.auth().createUserWithEmailAndPassword(email, passw).then(function() {
+			var temp_user = {'username':'Username'};
+			firebase.firestore().collection('users').doc(email).set(temp_user);
+			user.email = email;
+			id('signin').style.visibility = 'hidden';
+			id('dashboard').style.visibility = 'visible';
+			[].forEach.call(id('dashboard').children,function(c){c.style.visibility = 'visible';});
+		}).catch(function(error) {
+			alert(error.message);
+		});
+	};
+
+	id('firebasesignin').onclick = function() {
+		var email = id('email').value;
+		var passw = id('passw').value;
+		firebase.auth().signInWithEmailAndPassword(email, passw).then(function() {
+			user.email = email;
+			id('signin').style.visibility = 'hidden';
+			id('dashboard').style.visibility = 'visible';
+			[].forEach.call(id('dashboard').children,function(c){c.style.visibility = 'visible';});
+		}).catch(function(error) {
+			alert(error.message);
+		});
+	};
+
+	/*
 	id('signingoogle').onclick = function(){
 		id('signin').style.visibility = 'hidden';
 		id('dashboard').style.visibility = 'visible';
 		[].forEach.call(id('dashboard').children,function(c){c.style.visibility = 'visible';});
 	};
+	*/
 
 	id('shadows').onclick = function(){
 		id('shadows').firstChild.data = id('shadows').firstChild.data === 'On' ? 'Off' : 'On';
@@ -308,8 +334,24 @@ window.onload = () =>
 	};
 
 	id('user-logout').onclick = function() {
+		user.email = '';
+		id('email').value = '';
+		id('passw').value = '';
+		firebase.auth().signOut();
 		id('signin').style.visibility = 'visible';
 		id('dashboard').style.visibility = 'hidden';
 		[].forEach.call(id('dashboard').children,function(c){c.style.visibility = 'hidden';});
+	};
+
+	id('profile-upload').onchange = function(ev) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			id('profile-image').src = e.target.result;
+		};
+		reader.readAsDataURL(ev.target.files[0]);
+	}
+
+	id('profile-image').onclick = function() {
+		id('profile-upload').click();
 	};
 };

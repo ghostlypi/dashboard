@@ -39,17 +39,43 @@ html,body {
 	height:100%;
 }
 
-#signin div.half#btn-container {
-	display:flex;
-	justify-content:center;
-	align-items:center;
+#signin div.half#btn-container textarea, #signin div.half#btn-container input {
+	background:#2b2b2d;
+	text-align:center;
+	color:white;
+	margin:10px 10vw;
+	border-radius:5px;
+	width:30vw;
+	height:10vh;
+	font-family:'Titillium Web';
+	font-size:14pt;
+	resize:none;
+	white-space:pre;
+	text-align:center;
+	line-height:10vh;
+}
+
+#signin div.half#btn-container textarea#email {
+	margin-top:25vh;
+}
+
+#signin div.half#btn-container button#firebasecreateaccount {
+	margin-left:10vw;
+}
+
+#signin div.half#btn-container button#firebasesignin {
+	margin-left:10px;
 }
 
 #signin div.half#btn-container button {
 	background:#aa3333;
 	color:white;
 	border-radius:5px;
-	width:30vw;
+	margin-top:10px;
+	margin-bottom:10px;
+	margin-right:0px;
+	padding:0;
+	width:calc(15vw - 7.5px);
 	height:10vh;
 	font-family:'Titillium Web';
 	font-size:14pt;
@@ -248,7 +274,7 @@ div#top textarea
 	background:var(--bg-color-b);
 	resize:none;
 	font-family:'Titillium Web';
-	font-size:2vw;
+	font-size:1.25vw;
 }
 div#top button
 {
@@ -500,13 +526,13 @@ ol#settings{
 }
 ol#settings>li{
 	width:100%;
-	height:20%;
+	height:10%;
 }
 .setting-name,.setting-value{
 	float:left;
 	width:50%;
 	height:100%;
-	font-size:2em;
+	font-size:1.5em;
 	font-family:'Titillium Web';
 	background:transparent;
 	color:#fff;
